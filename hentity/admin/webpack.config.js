@@ -1,11 +1,14 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.jsx',
   output: {
     path: path.join(__dirname, '/build'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -38,9 +41,9 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'public'),
     },
+    historyApiFallback: true,
     open: true,
     hot: true,
-    liveReload: true,
   },
   resolve: {
     extensions: ['.jsx', '...'],
@@ -49,5 +52,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new ReactRefreshWebpackPlugin(),
   ],
 }
