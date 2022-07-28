@@ -29,6 +29,8 @@ module.exports = {
     'react/button-has-type': 0,
     'no-use-before-define': 0,
     'react/no-array-index-key': 0,
+    'no-template-curly-in-string': 0,
+    'no-underscore-dangle': 0,
     semi: 0,
   },
 }

@@ -6,9 +6,9 @@ function Button({ children, className, color, onClick, ...rest }, ref) {
   return (
     <button
       className={twMerge(
-        `px-2.5 py-1
+        `px-3 py-1
         rounded-md shadow-sm border 
-        border-slate-300 text-slate-700
+        border-slate-300 text-slate-600
         hover:brightness-110 hover:shadow-md
         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-base-500
         disabled:brightness-90 disabled:shadow-sm disabled:cursor-default

@@ -15,7 +15,7 @@ function Input({ label, error, required, value = '', onChange, className, type, 
       )}
       <input
         className={twMerge(
-          `w-full px-2.5 py-1 bg-white
+          `w-full px-2.5 py-[5px] bg-white
           rounded-md shadow-sm border border-slate-300 
           focus:outline-none focus:border-base-500
           focus:ring-2 focus:ring-offset-2 focus:ring-base-500
@@ -35,7 +35,7 @@ function Input({ label, error, required, value = '', onChange, className, type, 
       />
       <div
         className={twMerge(
-          `absolute -bottom-5 -translate-y-1/2 opacity-50
+          `absolute top-16 -translate-y-1/2 opacity-50
           text-xs text-red-500 transition`,
           classNames({ 'translate-y-0 opacity-100': error })
         )}

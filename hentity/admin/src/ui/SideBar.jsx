@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import useFormatMessage from 'hooks/useFormatMessage'
+import { Link, NavLink } from 'react-router-dom'
+import { useFormatMessage } from 'hooks'
 import { BiChevronLeft } from 'react-icons/bi'
 import { twMerge } from 'tailwind-merge'
 import classNames from 'classnames'
@@ -12,18 +12,18 @@ function SideBar({ menus }) {
   return (
     <div
       className={twMerge(
-        `relative w-56 shadow bg-white
+        `relative w-52 shadow bg-white
         transition-all duration-300 flex flex-col`,
         classNames({ 'w-16 collapsed': isCollapsed })
       )}
     >
       <div className='relative h-16 border-b border-slate-200 flex items-center'>
-        <div className='w-16 h-16 p-4'>
-          <img className='w-8 h-8' src={logo} alt='' />
+        <div className='w-16 h-16 flex justify-center items-center'>
+          <img className='w-10 h-10' src={logo} alt='' />
         </div>
         <div
-          className='absolute left-16 font-bold transition-all duration-300 origin-left
-              whitespace-nowrap collapsed:opacity-0 collapsed:scale-0'
+          className='absolute left-16 text-slate-700 font-bold transition-all duration-300 origin-left
+              collapsed:opacity-0 collapsed:scale-0'
         >
           Hentity Dashboard
         </div>
@@ -31,11 +31,15 @@ function SideBar({ menus }) {
       <div className='w-full h-[calc(100%-4rem)] flex flex-col justify-between'>
         <div className='h-full mb-4 p-3 overflow-auto'>
           {menus.map((menu) => (
-            <Link to={menu.to}>
+            <NavLink
+              to={menu.to}
+              className={({ isActive }) => (isActive ? 'selected' : '')}
+              key={menu.to}
+            >
               <div
                 className='relative mb-3 rounded-md cursor-pointer flex items-center text-slate-500
-                    hover:bg-base-50 hover:text-base-500 hover:font-medium'
-                key={menu.intlId}
+                    hover:bg-slate-100 hover:text-base-500
+                    selected:bg-base-100 selected:text-base-600 selected:font-medium'
               >
                 <div className='w-10 h-10 flex justify-center items-center'>
                   <menu.icon className='w-6 h-6 transition-all duration-300 collapsed:w-7 collapsed:h-7' />
@@ -44,10 +48,10 @@ function SideBar({ menus }) {
                   className='absolute left-12 ml-1 transition-all duration-300 origin-left
                       whitespace-nowrap collapsed:opacity-0 collapsed:scale-0'
                 >
-                  {t(null, menu.intlId)}
+                  {t(...menu.label)}
                 </div>
               </div>
-            </Link>
+            </NavLink>
           ))}
         </div>
         <div className='h-16 border-t border-slate-200 flex justify-center items-center'>
@@ -55,13 +59,13 @@ function SideBar({ menus }) {
         </div>
       </div>
       <div
-        className='absolute bottom-10 left-52 w-8 h-8 rounded-full shadow-md border
-          bg-white flex justify-center items-center
+        className='absolute bottom-10 left-48 w-8 h-8 rounded-full shadow-md border
+          bg-white text-slate-700 flex justify-center items-center hover:shadow-lg
           transition-all duration-300 cursor-pointer collapsed:left-12'
         onClick={() => setIsCollapsed(!isCollapsed)}
         aria-hidden='true'
       >
-        <BiChevronLeft className='w-6 h-6 text-slate-700 transition duration-300 collapsed:rotate-180' />
+        <BiChevronLeft className='w-6 h-6 transition duration-300 collapsed:rotate-180' />
       </div>
     </div>
   )

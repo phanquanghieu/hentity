@@ -21,22 +21,22 @@ function AuthLayout() {
 }
 const menus = [
   {
-    intlId: 'EntityManager',
+    label: ['EntityManager', 'EntityManager'],
     to: '/entity-manager',
     icon: BiData,
   },
   {
-    intlId: 'EntityBuilder',
+    label: ['EntityBuilder', 'EntityBuilder'],
     to: '/entity-builder',
     icon: BiEdit,
   },
   {
-    intlId: 'Upload',
+    label: ['Upload', 'Upload'],
     to: '/upload',
     icon: BiFilm,
   },
   {
-    intlId: 'Settings',
+    label: ['Settings', 'Settings'],
     to: '/settings',
     icon: BiWrench,
   },

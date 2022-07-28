@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
-import { BiChevronDown } from 'react-icons/bi'
+import { useOnClickOutside } from 'hooks'
 import { twMerge } from 'tailwind-merge'
 import classNames from 'classnames'
+import { BiChevronDown } from 'react-icons/bi'
 import Button from 'ui/Button'
-import useOnClickOutside from 'hooks/useOnClickOutside'
 
 function Dropdown({ options = [], value, onChange, color, className }) {
   const [show, setShow] = useState(false)

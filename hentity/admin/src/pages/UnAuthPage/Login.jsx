@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
-import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import useFormatMessage from 'hooks/useFormatMessage'
+import { useFormatMessage } from 'hooks'
+import * as yup from 'yup'
 import { Button, Input } from 'ui'
 import { errorTransIds, local } from 'utils'
 
@@ -21,7 +21,6 @@ function Login() {
     local.setUser({ id: 2, name: 'admin' })
     local.setJwtToken('ddddd')
     navigate('/')
-    console.log(data)
   }
   return (
     <div className='w-[500px] px-14 py-14 rounded-md shadow-md bg-white'>

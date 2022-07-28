@@ -24,6 +24,8 @@ module.exports = {
     require('@tailwindcss/forms'),
     ({ addVariant }) => {
       addVariant('collapsed', '.collapsed &')
+      addVariant('selected', '.selected &')
+      addVariant('used', '.used &')
     },
   ],
 }
