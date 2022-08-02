@@ -27,7 +27,6 @@ module.exports = {
     'react/prop-types': 0,
     'comma-dangle': 0,
     'react/button-has-type': 0,
-    'no-use-before-define': 0,
     'react/no-array-index-key': 0,
     'no-template-curly-in-string': 0,
     'no-underscore-dangle': 0,

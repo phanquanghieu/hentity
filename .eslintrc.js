@@ -8,6 +8,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
   },
+  global: ['hentity'],
   rules: {
     'import/no-unresolved': 0,
     'import/no-extraneous-dependencies': 0,
@@ -20,6 +21,8 @@ module.exports = {
     'arrow-body-style': 0,
     'comma-dangle': 0,
     'function-paren-newline': 0,
+    'no-restricted-syntax': 0,
+    'no-use-before-define': 0,
     semi: 0,
   },
 }

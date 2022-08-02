@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const addResponseMethods = require('./utils/addResponseMethods')
-const errorsMiddleware = require('./middleware/errors')
+const errorsMiddleware = require('./middlewares/errors')
 
 module.exports = () => {
   const cwd = process.cwd()
@@ -12,7 +12,8 @@ module.exports = () => {
   app.use('/admin', express.static(path.resolve(cwd, 'build')))
 
   app.get('/api', (req, res) => {
-    res.ok({ sss: 333 })
+    console.log(hentity.middlewares)
+    res.ok({ sss: hentity.middleware('global::sss www') })
   })
 
   app.use(errorsMiddleware())
