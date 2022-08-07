@@ -5,7 +5,11 @@ module.exports = () => {
 
   return {
     get(path) {
-      return get(services, path)
+      const service = get(services, path)
+      if (!service) {
+        throw Error(`Service not found: ${path}`)
+      }
+      return service
     },
 
     getAll() {

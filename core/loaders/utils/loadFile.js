@@ -1,6 +1,6 @@
 const path = require('path')
 const fse = require('fs-extra')
-const { string } = require('../../../utils')
+const { string } = require('../../utils')
 
 const loadJsFile = (file) => {
   try {

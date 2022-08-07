@@ -1,7 +1,7 @@
 const path = require('path')
 const fse = require('fs-extra')
-const loadApiFolder = require('./utils/loadApiFolder')
-const { string } = require('../../utils')
+const loadResourceFolder = require('./utils/loadResourceFolder')
+const { string } = require('../utils')
 
 module.exports = async (hentity) => {
   const apis = {}
@@ -12,15 +12,14 @@ module.exports = async (hentity) => {
     const apiName = apisFolder.name
 
     if (!string.isSnakeCase(apiName)) {
-      throw new Error(`Api name is not SnakeCase: ${apiName}`)
+      throw new Error(`Entity name is not SnakeCase: ${apiName}`)
     }
 
-    const apiFolderData = await loadApiFolder(path.join(hentity.dirs.apis, apiName))
+    const apiFolderData = await loadResourceFolder(path.join(hentity.dirs.apis, apiName))
 
     if (apiFolderData) {
       apis[apiName] = apiFolderData
     }
   }
-  console.log(apis)
   hentity.apisContainer.set(apis)
 }

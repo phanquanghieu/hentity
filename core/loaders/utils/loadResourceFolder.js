@@ -5,11 +5,11 @@ const loadFolder = require('./loadFolder')
 const subFolders = ['entities', 'routes', 'controllers', 'services', 'middlewares']
 
 module.exports = async (folderDir) => {
-  let apiFolderData = {}
+  let resourceFolderData = {}
   for (const subFolder of subFolders) {
     const folderData = await loadFolder(path.join(folderDir, subFolder))
     if (!folderData) continue
-    apiFolderData[subFolder] = folderData
+    resourceFolderData[subFolder] = folderData
   }
-  return isEmpty(apiFolderData) ? null : apiFolderData
+  return isEmpty(resourceFolderData) ? null : resourceFolderData
 }

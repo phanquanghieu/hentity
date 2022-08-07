@@ -1,36 +1,29 @@
-const src = require('./server/core')
-
-// const { createContainer } = require('./server/core/container')
-const containers = require('./server/core/containers')
-const loaders = require('./server/core/loaders')
-const { createDirs } = require('./server/core/utils')
+const containers = require('./core/containers')
+const loaders = require('./core/loaders')
+const { createServer } = require('./core/server')
+const { createDirs } = require('./core/utils')
 
 class Hentity {
   constructor(options = {}) {
-    // this.container = createContainer(this)
-    // this.container.register('configs', configsRegistry(this))
-    // this.container.register('entities', entitiesRegistry(this))
-    // this.container.register('services', servicesRegistry(this))
-    // // this.container.register('middlewares', middlewaresRegistry(this))
-    // this.container.register('controllers', controllersRegistry(this))
-    // this.container.register('apis', apisRegistry(this))
-
-    this.configsContainer = containers.createConfigsContainer(this)
-    this.entitiesContainer = containers.createEntitiesContainer(this)
-    this.servicesContainer = containers.createServicesContainer(this)
+    // this.configsContainer = containers.createConfigsContainer(this)
+    this.apisContainer = containers.createApisContainer(this)
+    this.routesContainer = containers.createRoutesContainer(this)
     this.middlewaresContainer = containers.createMiddlewaresContainer(this)
     this.controllersContainer = containers.createControllersContainer(this)
-    this.apisContainer = containers.createApisContainer(this)
+    this.servicesContainer = containers.createServicesContainer(this)
+    this.entitiesContainer = containers.createEntitiesContainer(this)
 
     // this.isLoaded = false
+    this.configs = null
     this.dirname = __dirname
     this.dirs = createDirs(options.dir || process.cwd())
-    this.server = null
+    this.server = createServer(this)
     this.db = null
   }
 
   async register() {
     await Promise.all([
+      loaders.configsLoader(this),
       loaders.adminLoader(this),
       loaders.middlewaresLoader(this),
       loaders.apisLoader(this),
@@ -38,7 +31,7 @@ class Hentity {
   }
 
   async bootstrap() {
-    src()
+    this.server.mount()
   }
 
   async start() {
@@ -46,12 +39,10 @@ class Hentity {
       await this.register()
       await this.bootstrap()
 
-      console.log(this.all)
-      // await this.listen()
+      this.server.listen()
       return this
     } catch (error) {
       console.log(error)
-      // return this.stopWithError(error)
     }
   }
 
@@ -62,6 +53,7 @@ class Hentity {
       servicesContainer: this.servicesContainer.getAll(),
       middlewaresContainer: this.middlewaresContainer.getAll(),
       controllersContainer: this.controllersContainer.getAll(),
+      routesContainer: this.routesContainer.getAll(),
       apisContainer: this.apisContainer.getAll(),
     }
   }
@@ -69,15 +61,36 @@ class Hentity {
   get apis() {
     return this.apisContainer.getAll()
   }
-  api(uid) {
-    return this.apisContainer.get(uid)
+  api(path) {
+    return this.apisContainer.get(path)
+  }
+
+  get routes() {
+    return this.routesContainer.getAll()
+  }
+  route(path) {
+    return this.routesContainer.get(path)
   }
 
   get middlewares() {
     return this.middlewaresContainer.getAll()
   }
-  middleware(uid) {
-    return this.middlewaresContainer.get(uid)
+  middleware(path) {
+    return this.middlewaresContainer.get(path)
+  }
+
+  get controllers() {
+    return this.controllersContainer.getAll()
+  }
+  controller(path) {
+    return this.controllersContainer.get(path)
+  }
+
+  get services() {
+    return this.servicesContainer.getAll()
+  }
+  service(path) {
+    return this.servicesContainer.get(path)
   }
 }
 

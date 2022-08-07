@@ -5,7 +5,11 @@ module.exports = () => {
 
   return {
     get(path) {
-      return get(controllers, path)
+      const controller = get(controllers, path)
+      if (!controller) {
+        throw Error(`Controller not found: ${path}`)
+      }
+      return controller
     },
 
     getAll() {

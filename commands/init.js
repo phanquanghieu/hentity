@@ -8,8 +8,7 @@ const generateSecret = () => crypto.randomBytes(16).toString('base64')
 const createEnvFile = () => `HOST=0.0.0.0
 PORT=1337
 ADMIN_JWT_SECRET=${generateSecret()}
-API_TOKEN_SALT=${generateSecret()}
-APP_KEYS=${generateSecret()}`
+JWT_SECRET=${generateSecret()}`
 
 const createPackageJSONFile = () => {
   const packageJSON = require(resolve('package.json'))
