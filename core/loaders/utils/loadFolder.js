@@ -1,6 +1,6 @@
 const path = require('path')
 const fse = require('fs-extra')
-const { isEmpty } = require('lodash')
+const { isEmpty, isFunction, isObject } = require('lodash')
 const loadFile = require('./loadFile')
 
 module.exports = async (folderDir) => {
@@ -15,7 +15,9 @@ module.exports = async (folderDir) => {
     const base = path.basename(file.name, path.extname(file.name))
 
     const fileData = await loadFile(path.resolve(folderDir, file.name))
-    if (fileData) folderData[base] = fileData
+    if (isFunction(fileData) || (isObject(fileData) && !isEmpty(fileData))) {
+      folderData[base] = fileData
+    }
   }
 
   return isEmpty(folderData) ? null : folderData

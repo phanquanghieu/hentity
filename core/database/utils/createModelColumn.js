@@ -1,0 +1,111 @@
+const { DataTypes } = require('sequelize')
+
+module.exports = () => {
+  return {
+    password: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.STRING,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    email: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.STRING,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: { isEmail: true },
+    }),
+    string: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.STRING,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    richtext: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.TEXT,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    text: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.TEXT,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    json: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.JSON,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    enum: ({ required = false, defaultValue, unique = false, ...rest }) => ({
+      type: DataTypes.ENUM,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: { isIn: [rest.enum] },
+    }),
+    integer: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.INTEGER,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    biginteger: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.BIGINT,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    float: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.FLOAT,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    decimal: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.DECIMAL,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    date: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.DATEONLY,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    time: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.TIME,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    datetime: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.DATE,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+    boolean: ({ required = false, defaultValue, unique = false }) => ({
+      type: DataTypes.BOOLEAN,
+      allowNull: !required,
+      defaultValue,
+      unique,
+      validate: {},
+    }),
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "type": "collection",
+  "tableName": "tests",
+  "singularName": "test",
+  "pluralName": "tests",
+  "displayName": "Test",
+  "attributes": {
+    "text_short": {
+      "type": "string"
+    },
+    "text_long": {
+      "type": "text"
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true,
+      "minLength": 333,
+      "maxLength": 333,
+      "private": true
+    },
+    "rich_text": {
+      "type": "richtext",
+      "default": "333",
+      "required": true,
+      "minLength": 1,
+      "private": true,
+      "maxLength": 3
+    },
+    "pass": {
+      "type": "password"
+    },
+    "num_inte": {
+      "type": "integer"
+    },
+    "num_big": {
+      "type": "biginteger"
+    },
+    "num_dec": {
+      "type": "decimal"
+    },
+    "num_float": {
+      "type": "float"
+    },
+    "enum": {
+      "type": "enumeration",
+      "enum": ["s", "aa", "aaaa"],
+      "private": true,
+      "required": true
+    },
+    "d_date": {
+      "type": "date",
+      "default": "2022-06-29"
+    },
+    "d_datetime": {
+      "type": "datetime",
+      "default": "2022-06-27T17:01:00.000Z"
+    },
+    "d_time": {
+      "type": "time",
+      "default": "00:01"
+    },
+    "bool": {
+      "type": "boolean",
+      "default": true
+    },
+    "json": {
+      "type": "json"
+    },
+    "compo": {
+      "type": "component",
+      "repeatable": true,
+      "component": "c.c1"
+    }
+  }
+}

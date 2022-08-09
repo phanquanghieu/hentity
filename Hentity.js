@@ -1,11 +1,11 @@
 const containers = require('./core/containers')
 const loaders = require('./core/loaders')
+const { createDatabase } = require('./core/database')
 const { createServer } = require('./core/server')
 const { createDirs } = require('./core/utils')
 
 class Hentity {
   constructor(options = {}) {
-    // this.configsContainer = containers.createConfigsContainer(this)
     this.apisContainer = containers.createApisContainer(this)
     this.routesContainer = containers.createRoutesContainer(this)
     this.middlewaresContainer = containers.createMiddlewaresContainer(this)
@@ -13,12 +13,11 @@ class Hentity {
     this.servicesContainer = containers.createServicesContainer(this)
     this.entitiesContainer = containers.createEntitiesContainer(this)
 
-    // this.isLoaded = false
-    this.configs = null
     this.dirname = __dirname
     this.dirs = createDirs(options.dir || process.cwd())
-    this.server = createServer(this)
+    this.configs = null
     this.db = null
+    this.server = createServer(this)
   }
 
   async register() {
@@ -31,6 +30,9 @@ class Hentity {
   }
 
   async bootstrap() {
+    console.log(this.entities)
+    this.db = await createDatabase({ configs: this.configs, models: this.entities })
+    console.log(this.db.models)
     this.server.mount()
   }
 
@@ -48,13 +50,12 @@ class Hentity {
 
   get all() {
     return {
-      // configsContainer: this.configsContainer.getAll(),
-      entitiesContainer: this.entitiesContainer.getAll(),
-      servicesContainer: this.servicesContainer.getAll(),
+      apisContainer: this.apisContainer.getAll(),
+      routesContainer: this.routesContainer.getAll(),
       middlewaresContainer: this.middlewaresContainer.getAll(),
       controllersContainer: this.controllersContainer.getAll(),
-      routesContainer: this.routesContainer.getAll(),
-      apisContainer: this.apisContainer.getAll(),
+      servicesContainer: this.servicesContainer.getAll(),
+      entitiesContainer: this.entitiesContainer.getAll(),
     }
   }
 
@@ -91,6 +92,13 @@ class Hentity {
   }
   service(path) {
     return this.servicesContainer.get(path)
+  }
+
+  get entities() {
+    return this.entitiesContainer.getAll()
+  }
+  entity(path) {
+    return this.entitiesContainer.get(path)
   }
 }
 

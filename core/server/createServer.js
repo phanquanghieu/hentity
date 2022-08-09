@@ -31,8 +31,8 @@ module.exports = (hentity) => {
     },
 
     listen() {
-      console.log(hentity.services.admin.core)
-      console.log(hentity.routes.admin)
+      // console.log(hentity.services.admin.core)
+      // console.log(hentity.routes.admin)
       return app.listen(9322, () =>
         console.log(
           'Running on\nhttp://localhost:9322\nhttp://localhost:9322/api\nhttp://localhost:9322/admin-api'
