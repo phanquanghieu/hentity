@@ -9,9 +9,9 @@ module.exports = (app, hentity) => {
   app.use('/api', createRouter(routes.api, hentity))
 }
 
-const createRouter = (routes, hentity) => {
+const createRouter = (routes = {}, hentity) => {
   const router = Router()
-
+  console.log(routes)
   Object.values(routes).forEach((routesFiles) => {
     Object.values(routesFiles).forEach((routesFile) => {
       routesFile.forEach((route) => {

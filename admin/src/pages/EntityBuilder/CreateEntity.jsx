@@ -59,9 +59,9 @@ function CreateEntity() {
                     required
                     {...field}
                     onChange={(e) => {
-                      const value = string.toKebabCase(e.target.value)
-                      setValue('singularName', string.toKebabCase(singular(value)))
-                      setValue('pluralName', string.toKebabCase(plural(value)))
+                      const value = string.toSnakeCase(e.target.value)
+                      setValue('singularName', string.toSnakeCase(singular(value)))
+                      setValue('pluralName', string.toSnakeCase(plural(value)))
                       field.onChange(e)
                     }}
                   />
@@ -127,8 +127,8 @@ export default CreateEntity
 
 const entitySchema = yup.object({
   displayName: yup.string().required(errorTransIds.required),
-  singularName: yup.string().isKebabCase().required(errorTransIds.required),
-  pluralName: yup.string().isKebabCase().required(errorTransIds.required),
+  singularName: yup.string().required(errorTransIds.required).isSnakeCase(),
+  pluralName: yup.string().required(errorTransIds.required).isSnakeCase(),
 })
 
 const ENTITY = {

@@ -1,13 +1,13 @@
-import { useFormatMessage } from 'hooks'
 import React, { useEffect, useState } from 'react'
-import { BiCheck, BiPencil, BiPlus, BiTrash, BiTrashAlt } from 'react-icons/bi'
 import { useLocation } from 'react-router-dom'
+import { useFormatMessage } from 'hooks'
+import { BiCheck, BiPencil, BiPlus, BiTrash, BiTrashAlt } from 'react-icons/bi'
 import { Button, Modal } from 'ui'
 import ModalAttributes from './components/ModalAttributes'
 
 function BuilderEntity() {
   const [entity, setEntity] = useState({})
-  const [attribute, setAttribute] = useState(null)
+  const [attribute, setAttribute] = useState({})
   const [show, setShow] = useState(false)
   const t = useFormatMessage()
   const location = useLocation()
@@ -22,7 +22,7 @@ function BuilderEntity() {
     <div className='relative h-screen overflow-auto flex-1'>
       <div className='sticky top-0 min-h-[4rem] px-5 shadow-md bg-white flex justify-between items-center'>
         <div className='font-bold text-2xl'>{entity.displayName}</div>
-        <Button onClick={() => setShow(!show)} color='base'>
+        <Button color='base'>
           <div className='flex items-center'>
             <BiCheck className='w-5 h-5 -ml-1 mr-1' />
             <div>{t('Save')}</div>
@@ -52,12 +52,15 @@ function BuilderEntity() {
             </tbody>
           </table>
         </div>
-        <div className='px-4 py-3 shadow-md rounded-b-md bg-base-100 text-base-500 flex items-center cursor-pointer'>
+        <div
+          className='px-4 py-3 shadow-md rounded-b-md bg-base-100 text-base-500 flex items-center cursor-pointer'
+          onClick={() => setShow(!show)}
+        >
           <BiPlus className='w-5 h-5 mr-2 rounded-full bg-base-400 text-white' />
           <div>{t('Add other attribute')}</div>
         </div>
       </div>
-      <ModalAttributes attribute={attribute} show={show} onClose={() => setShow(false)} />
+      {show && <ModalAttributes attribute={attribute} show={show} onClose={() => setShow(false)} />}
     </div>
   )
 }

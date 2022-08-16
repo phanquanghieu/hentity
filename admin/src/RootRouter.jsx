@@ -22,7 +22,7 @@ const CreateComponent = React.lazy(() => import('pages/EntityBuilder/CreateCompo
 
 function RootRouter() {
   return (
-    <BrowserRouter basename='/admin'>
+    <BrowserRouter basename={process.env.ADMIN_PATH}>
       <Suspense
         fallback={
           <div className='w-screen h-screen'>

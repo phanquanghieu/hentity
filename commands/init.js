@@ -6,7 +6,10 @@ const { set } = require('lodash')
 const generateSecret = () => crypto.randomBytes(16).toString('base64')
 
 const createEnvFile = () => `HOST=0.0.0.0
-PORT=1337
+PORT=9322
+BACKEND_URL=http://localhost:9322
+CONNECTION_STRING=mysql://root:password@localhost:3306/test
+ADMIN_PATH=/admin
 ADMIN_JWT_SECRET=${generateSecret()}
 JWT_SECRET=${generateSecret()}`
 

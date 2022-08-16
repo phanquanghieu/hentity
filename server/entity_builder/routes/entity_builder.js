@@ -1,9 +1,9 @@
 module.exports = [
   {
     method: 'GET',
-    path: '/e',
+    path: '/entity_builder/entities',
     handler: 'admin.entity_builder.entity_builder.find',
-    middlewares: ['admin.entity_builder.mid'],
+    middlewares: [],
     auth: {
       strategy: 'admin',
     },

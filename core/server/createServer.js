@@ -14,12 +14,18 @@ module.exports = (hentity) => {
 
     mount() {
       app.use(coreMiddlewares.logRequest)
+      app.use(coreMiddlewares.cors())
 
-      app.use('/admin', express.static(path.resolve(hentity.dirs.cwd, 'build')))
-      app.get(['/', '/admin/*'], (_, res) => {
-        res.redirect('/admin')
+      
+      const adminPath = hentity.configs.admin.adminPath
+      const buildPath = path.resolve(hentity.dirs.cwd, 'build')
+      app.use(adminPath, express.static(buildPath))
+      app.get(`${adminPath}/*`, (_, res) => {
+        res.sendFile(path.resolve(buildPath, 'index.html'))
       })
+
       app.get('/api', (req, res) => {
+        console.log(req)
         const p = hentity.services.admin.core.jwt.verify()
 
         res.ok(hentity.routes.admin)
@@ -35,7 +41,7 @@ module.exports = (hentity) => {
       // console.log(hentity.routes.admin)
       return app.listen(9322, () =>
         console.log(
-          'Running on\nhttp://localhost:9322\nhttp://localhost:9322/api\nhttp://localhost:9322/admin-api'
+          'Running on\nhttp://localhost:9322/admin\nhttp://localhost:9322/api\nhttp://localhost:9322/admin-api'
         )
       )
     },

@@ -1,0 +1,260 @@
+import AttributeIcons from './AttributeIcons'
+
+const ATTRIBUTES = {
+  string: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'String',
+      valueType: 'text',
+      description: 'string',
+    },
+    model: {
+      type: 'string',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+
+  text: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'Text',
+      valueType: 'textarea',
+      description: 'text',
+    },
+    model: {
+      type: 'text',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  richtext: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'Richtext',
+      valueType: 'text',
+      description: 'richtext',
+    },
+    model: {
+      type: 'richtext',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  password: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'Password',
+      valueType: 'password',
+      description: 'password',
+    },
+    model: {
+      type: 'password',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  email: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'Email',
+      valueType: 'email',
+      description: 'email',
+    },
+    model: {
+      type: 'email',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  integer: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'Integer',
+      valueType: 'number',
+      description: 'integer',
+    },
+    model: {
+      type: 'integer',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  biginteger: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'Biginteger',
+      valueType: 'number',
+      description: 'biginteger',
+    },
+    model: {
+      type: 'biginteger',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  float: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'Float',
+      valueType: 'number',
+      description: 'float',
+    },
+    model: {
+      type: 'float',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  decimal: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'Decimal',
+      valueType: 'number',
+      description: 'decimal',
+    },
+    model: {
+      type: 'decimal',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  date: {
+    info: { icon: AttributeIcons.IconText, label: 'Date', valueType: 'date', description: 'date' },
+    model: {
+      type: 'date',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  time: {
+    info: { icon: AttributeIcons.IconText, label: 'Time', valueType: 'time', description: 'time' },
+    model: {
+      type: 'time',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  datetime: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'Datetime',
+      valueType: 'datetime',
+      description: 'datetime',
+    },
+    model: {
+      type: 'datetime',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  json: {
+    info: { icon: AttributeIcons.IconText, label: 'Json', valueType: 'json', description: 'json' },
+    model: {
+      type: 'json',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  enum: {
+    info: { icon: AttributeIcons.IconText, label: 'Enum', valueType: 'enum', description: 'enum' },
+    model: {
+      type: 'enum',
+      displayName: '',
+      enum: [],
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  boolean: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'Boolean',
+      valueType: 'boolean',
+      description: 'boolean',
+    },
+    model: {
+      type: 'boolean',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+  relation: {
+    info: {
+      icon: AttributeIcons.IconText,
+      label: 'Relation',
+      valueType: 'relation',
+      description: 'Relation',
+    },
+    model: {
+      type: 'relation',
+      displayName: '',
+      required: false,
+      default: null,
+      unique: false,
+      private: false,
+      configurable: true,
+    },
+  },
+}
+
+export { ATTRIBUTES }

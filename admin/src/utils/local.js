@@ -38,6 +38,11 @@ const local = {
     localStorage.clear()
   },
 
+  clear(){
+    this.clearL()
+    this.clearS()
+  },
+
   getJwtToken() {
     return this.getL(JWT_TOKEN)
   },

@@ -2,7 +2,7 @@ const { Sequelize, DataTypes, Op } = require('sequelize')
 const { createModels, transformModels, createModelColumn, connectionOptions } = require('./utils')
 
 module.exports = async (options) => {
-  const modelColumnCreator = createModelColumn(options.configs.admin)
+  const modelColumnCreator = createModelColumn()
 
   const models = transformModels(options.models)
   console.log(models)

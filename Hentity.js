@@ -3,7 +3,7 @@ const loaders = require('./core/loaders')
 const { createDatabase } = require('./core/database')
 const { createServer } = require('./core/server')
 const { createDirs } = require('./core/utils')
-
+const { buildAdmin } = require('./admin')
 class Hentity {
   constructor(options = {}) {
     this.apisContainer = containers.createApisContainer(this)
@@ -40,6 +40,7 @@ class Hentity {
     try {
       await this.register()
       await this.bootstrap()
+      // await buildAdmin({ cwd: this.dirs.cwd, configs: this.configs })
 
       this.server.listen()
       return this

@@ -1,4 +1,5 @@
 module.exports = {
-  host: process.env.HOST || '0.0.0.0',
-  port: parseInt(process.env.PORT || 1337),
+  host: process.env.HOST,
+  port: parseInt(process.env.PORT),
+  backendUrl: process.env.BACKEND_URL,
 }

@@ -265,7 +265,7 @@ export default {
   },
 }
 
-export const colorNames = [
+export const COLOR_NAMES = [
   'slate',
   'gray',
   'zinc',

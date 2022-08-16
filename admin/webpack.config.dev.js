@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const { join } = require('path')
 
@@ -39,9 +40,6 @@ module.exports = {
   },
   devServer: {
     port: '1403',
-    // static: {
-    //   directory: join(__dirname, 'public'),
-    // },
     historyApiFallback: true,
     open: true,
     hot: true,
@@ -54,5 +52,9 @@ module.exports = {
       template: join(__dirname, 'src/index.html'),
     }),
     new ReactRefreshWebpackPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.BACKEND_URL': JSON.stringify('http://localhost:9322'),
+      'process.env.ADMIN_PATH': JSON.stringify('/'),
+    }),
   ],
 }

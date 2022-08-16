@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { local } from 'utils'
-import colors from 'configs/colors'
+import COLORS from 'constant/colors'
 
 const initialState = {
   mode: 'light',
@@ -13,7 +13,7 @@ const applyThemeMode = (mode) => {
 }
 
 const applyBaseColor = (baseColor) => {
-  const color = colors[baseColor] || colors.emerald
+  const color = COLORS[baseColor] || COLORS.emerald
   Object.keys(color).forEach((tone) => {
     document.body.style.setProperty(`--base-color-${tone}`, color[tone])
   })

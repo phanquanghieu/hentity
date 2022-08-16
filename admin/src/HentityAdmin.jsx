@@ -34,4 +34,4 @@ class HentityAdmin {
   }
 }
 
-export default () => new HentityAdmin()
+export default HentityAdmin
