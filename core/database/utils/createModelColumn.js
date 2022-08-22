@@ -49,6 +49,7 @@ module.exports = () => {
       allowNull: !required,
       defaultValue,
       unique,
+      values: rest.enum,
       validate: { isIn: [rest.enum] },
     }),
     integer: ({ required = false, defaultValue, unique = false }) => ({

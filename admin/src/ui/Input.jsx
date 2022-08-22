@@ -1,9 +1,17 @@
-import React, { useId } from 'react'
+import React, { useEffect, useId, useState } from 'react'
 import classNames from 'classnames'
 import { twMerge } from 'tailwind-merge'
 
-function Input({ label, error, required, value = '', onChange, className, type, ...rest }, ref) {
+function Input(
+  { label, error, required, value = '', onChange, onBlur, className, type, ...rest },
+  ref
+) {
+  const [valueInner, setValueInner] = useState(value)
   const id = useId()
+
+  useEffect(() => {
+    setValueInner(value)
+  }, [value])
 
   return (
     <div className='relative w-full mb-6 flex flex-col'>
@@ -27,8 +35,12 @@ function Input({ label, error, required, value = '', onChange, className, type, 
           className
         )}
         type={type}
-        value={value}
-        onChange={onChange}
+        value={valueInner}
+        onChange={(e) => {
+          setValueInner(e.target.value)
+          onChange?.(e)
+        }}
+        onBlur={onBlur}
         ref={ref}
         id={id}
         {...rest}

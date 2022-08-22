@@ -1,21 +1,24 @@
-const { Sequelize, DataTypes, Op } = require('sequelize')
-const { createModels, transformModels, createModelColumn, connectionOptions } = require('./utils')
+const {
+  createEntityQuery,
+  createModelColumn,
+  createModels,
+  transformModels,
+  createConnection,
+} = require('./utils')
 
 module.exports = async (options) => {
   const modelColumnCreator = createModelColumn()
 
   const models = transformModels(options.models)
-  console.log(models)
-  const connection = new Sequelize(options.configs.database.connectionString, connectionOptions)
-
+  const connection = createConnection(options.configs.database.connectionString)
   await createModels(connection, models, modelColumnCreator)
 
+  const query = connection.models
+  const entityQuery = createEntityQuery(query, models)
+
   return {
-    get connection() {
-      return connection
-    },
-    get models() {
-      return connection.models
-    },
+    connection,
+    query,
+    entityQuery,
   }
 }

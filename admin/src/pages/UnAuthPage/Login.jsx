@@ -17,6 +17,7 @@ function Login() {
   const navigate = useNavigate()
   const t = useFormatMessage()
 
+
   const onSubmit = (data) => {
     local.setUser({ id: 2, name: 'admin' })
     local.setJwtToken('ddddd')

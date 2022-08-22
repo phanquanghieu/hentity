@@ -9,11 +9,12 @@ import logo from 'assets/images/logo.png'
 function SideBar({ menus }) {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const t = useFormatMessage()
+
   return (
     <div
       className={twMerge(
         `relative w-52 shadow bg-white
-        transition-all duration-300 flex flex-col`,
+        transition-all duration-300 flex flex-col flex-shrink-0`,
         classNames({ 'w-16 collapsed': isCollapsed })
       )}
     >

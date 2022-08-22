@@ -4,5 +4,6 @@ module.exports = {
   cors: require('./cors'),
   errorHandler: require('./errorHandler'),
   logRequest: require('./logRequest'),
+  query: require('./query'),
   routeInfo: require('./routeInfo'),
 }

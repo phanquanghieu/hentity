@@ -26,7 +26,6 @@ const buildAdmin = async ({ cwd, configs }) => {
 
     await fse.copy(path.join(__dirname, 'build'), path.join(buildDir))
     // }
-
     return console.log('Done!')
   } catch (error) {
     return console.error(error)

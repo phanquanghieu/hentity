@@ -10,6 +10,9 @@
     "bin": "./bin"
   },
   "scripts": {
+    "dev":"npm-run-all --parallel dev_be dev_fe",
+    "dev_fe": "cd admin && npm run dev",
+    "dev_be": "cd dev_server && npm run dev",
     "dev_db": "nodemon dev_database.js"
   },
   "repository": {

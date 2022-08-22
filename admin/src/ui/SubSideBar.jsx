@@ -9,6 +9,7 @@ import { upperCase } from 'lodash'
 
 function SubSideBar({ header = [], menus = [] }) {
   const t = useFormatMessage()
+
   return (
     <div className='w-52 h-screen shadow bg-slate-50'>
       <div className='h-16 pl-4 border-b border-x bg-white text-lg font-bold text-slate-700 flex items-center'>
@@ -26,6 +27,7 @@ function SubSideBar({ header = [], menus = [] }) {
 function Collapse({ menu }) {
   const [show, setShow] = useState(true)
   const t = useFormatMessage()
+
   return (
     <div className={classNames('text-slate-600', { collapsed: !show })}>
       <div
@@ -70,4 +72,4 @@ function Collapse({ menu }) {
   )
 }
 
-export default SubSideBar
+export default React.memo(SubSideBar)

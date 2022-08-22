@@ -11,7 +11,7 @@ module.exports = (app, hentity) => {
 
 const createRouter = (routes = {}, hentity) => {
   const router = Router()
-  console.log(routes)
+
   Object.values(routes).forEach((routesFiles) => {
     Object.values(routesFiles).forEach((routesFile) => {
       routesFile.forEach((route) => {
@@ -36,6 +36,15 @@ const mountRoute = (router, route, hentity) => {
     coreMiddlewares.authentication,
     coreMiddlewares.authorization,
     ...middlewares,
-    handler
+    handlerCatcher(handler)
   )
+}
+
+const handlerCatcher = (handler) => async (req, res, next) => {
+  try {
+    await handler(req, res, next)
+  } catch (error) {
+    console.error(error)
+    res.badRequest(error)
+  }
 }

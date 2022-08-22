@@ -1,0 +1,37 @@
+{
+  "type": "collection",
+  "tableName": "cates",
+  "singularName": "cate",
+  "pluralName": "cates",
+  "displayName": "Cate",
+  "attributes": [
+    {
+      "type": "string",
+      "columnName": "string",
+      "displayName": "string",
+      "unique": true
+    },
+    {
+      "type": "integer",
+      "columnName": "integer",
+      "displayName": "integer",
+      "defaultValue": 22,
+      "required": true
+    },
+    {
+      "type": "boolean",
+      "columnName": "bol",
+      "displayName": "bol",
+      "private": true
+    },
+    {
+      "type": "enum",
+      "columnName": "ww",
+      "displayName": "ww",
+      "enum": [
+        "ee",
+        "sas"
+      ]
+    }
+  ]
+}

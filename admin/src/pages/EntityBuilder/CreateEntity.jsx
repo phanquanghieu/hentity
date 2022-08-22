@@ -8,6 +8,8 @@ import { BiCheck } from 'react-icons/bi'
 import { plural, singular } from 'pluralize'
 import { Button, Input, Radio } from 'ui'
 import { errorTransIds, string, yup } from 'utils'
+import { setEntityEdit } from 'redux/slices/entityBuilderSlice'
+import { useDispatch } from 'react-redux'
 
 function CreateEntity() {
   const {
@@ -18,9 +20,10 @@ function CreateEntity() {
     watch,
   } = useForm({ resolver: yupResolver(entitySchema), mode: 'onChange' })
 
-  const t = useFormatMessage()
   const location = useLocation()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const t = useFormatMessage()
 
   useEffect(() => {
     const entityType = location.state?.entityType || 'collection'
@@ -28,8 +31,9 @@ function CreateEntity() {
   }, [location])
 
   const onSubmit = (data) => {
-    const entity = { ...ENTITY, ...data, tableName: string.toSnakeCase(data.pluralName) }
-    navigate(`/entity-builder/entity/api::${entity.singularName}`, { state: { entity } })
+    const _entityEdit = { ...ENTITY, ...data, tableName: string.toSnakeCase(data.pluralName) }
+    dispatch(setEntityEdit(_entityEdit))
+    navigate(`/entity_builder/entity/${_entityEdit.singularName}`)
   }
 
   const type = watch('type')
@@ -37,7 +41,7 @@ function CreateEntity() {
     <div className='relative h-screen overflow-auto flex-1'>
       <div className='sticky top-0 min-h-[4rem] px-5 shadow-md bg-white flex justify-between items-center'>
         <div className='font-bold text-2xl'>{t(`Create ${upperFirst(type)}`)}</div>
-        <Button onClick={() => handleSubmit(onSubmit)()} color='base'>
+        <Button onClick={handleSubmit(onSubmit)} color='base'>
           <div className='flex items-center'>
             <BiCheck className='w-5 h-5 -ml-1 mr-1' />
             <div>{t('Create')}</div>
@@ -60,8 +64,12 @@ function CreateEntity() {
                     {...field}
                     onChange={(e) => {
                       const value = string.toSnakeCase(e.target.value)
-                      setValue('singularName', string.toSnakeCase(singular(value)))
-                      setValue('pluralName', string.toSnakeCase(plural(value)))
+                      setValue('singularName', string.toSnakeCase(singular(value)),{
+                        shouldValidate: true,
+                      })
+                      setValue('pluralName', string.toSnakeCase(plural(value)),{
+                        shouldValidate: true,
+                      })
                       field.onChange(e)
                     }}
                   />
@@ -126,9 +134,9 @@ function CreateEntity() {
 export default CreateEntity
 
 const entitySchema = yup.object({
-  displayName: yup.string().required(errorTransIds.required),
-  singularName: yup.string().required(errorTransIds.required).isSnakeCase(),
-  pluralName: yup.string().required(errorTransIds.required).isSnakeCase(),
+  displayName: yup.string().trim().required(errorTransIds.required),
+  singularName: yup.string().trim().required(errorTransIds.required).isSnakeCase(),
+  pluralName: yup.string().trim().required(errorTransIds.required).isSnakeCase(),
 })
 
 const ENTITY = {
@@ -137,16 +145,14 @@ const ENTITY = {
   singularName: '',
   pluralName: '',
   displayName: '',
-  privateAttributes: [],
-  attributes: {
-    // name: {
-    //   type: 'string',
-    // },
-    // category: {
-    //   type: 'relation',
-    //   relation: 'manyToOne',
-    //   target: 'api::category.category',
-    //   inversedBy: 'books',
-    // },
-  },
+  attributes: [],
+  // name: {
+  //   type: 'string',
+  // },
+  // category: {
+  //   type: 'relation',
+  //   relation: 'manyToOne',
+  //   target: 'api::category.category',
+  //   inversedBy: 'books',
+  // },
 }

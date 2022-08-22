@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
 
-export default function useFormatMessage() {
+export default function useFormatMessage(defaultMessage, id) {
   const { formatMessage } = useIntl()
 
   return (defaultMessage, id) => {

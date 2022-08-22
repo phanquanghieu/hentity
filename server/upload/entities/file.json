@@ -4,73 +4,26 @@
   "singularName": "file",
   "pluralName": "files",
   "displayName": "File",
-  "attributes": {
-    "name": {
-      "type": "string",
-      "configurable": false,
-      "required": true
-    },
-    "alternativeText": {
-      "type": "string",
-      "configurable": false
-    },
-    "caption": {
-      "type": "string",
-      "configurable": false
-    },
-    "width": {
-      "type": "integer",
-      "configurable": false
-    },
-    "height": {
-      "type": "integer",
-      "configurable": false
-    },
-    "formats": {
-      "type": "json",
-      "configurable": false
-    },
-    "hash": {
-      "type": "string",
-      "configurable": false,
-      "required": true
-    },
-    "ext": {
-      "type": "string",
-      "configurable": false
-    },
-    "mime": {
-      "type": "string",
-      "configurable": false,
-      "required": true
-    },
-    "size": {
-      "type": "decimal",
-      "configurable": false,
-      "required": true
-    },
-    "url": {
-      "type": "string",
-      "configurable": false,
-      "required": true
-    },
-    "previewUrl": {
-      "type": "string",
-      "configurable": false
-    },
-    "provider": {
-      "type": "string",
-      "configurable": false,
-      "required": true
-    },
-    "provider_metadata": {
-      "type": "json",
-      "configurable": false
-    },
-    "related": {
+  "attributes": [
+    { "columnName": "name", "type": "string", "configurable": false, "required": true },
+    { "columnName": "alternativeText", "type": "string", "configurable": false },
+    { "columnName": "caption", "type": "string", "configurable": false },
+    { "columnName": "width", "type": "integer", "configurable": false },
+    { "columnName": "height", "type": "integer", "configurable": false },
+    { "columnName": "formats", "type": "json", "configurable": false },
+    { "columnName": "hash", "type": "string", "configurable": false, "required": true },
+    { "columnName": "ext", "type": "string", "configurable": false },
+    { "columnName": "mime", "type": "string", "configurable": false, "required": true },
+    { "columnName": "size", "type": "decimal", "configurable": false, "required": true },
+    { "columnName": "url", "type": "string", "configurable": false, "required": true },
+    { "columnName": "previewUrl", "type": "string", "configurable": false },
+    { "columnName": "provider", "type": "string", "configurable": false, "required": true },
+    { "columnName": "provider_metadata", "type": "json", "configurable": false },
+    {
+      "columnName": "related",
       "type": "relation",
       "relation": "morphToMany",
       "configurable": false
     }
-  }
+  ]
 }

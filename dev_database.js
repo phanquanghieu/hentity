@@ -108,7 +108,7 @@ const run = async () => {
     include: 'actor',
   })
   // r.setActor(1)
-  console.log(JSON.parse(JSON.stringify(r)))
+  // console.log(JSON.parse(JSON.stringify(r)))
   // await db.models.movies.drop()
   // await db.models.actors.drop()
 }

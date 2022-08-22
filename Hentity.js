@@ -17,6 +17,8 @@ class Hentity {
     this.dirs = createDirs(options.dir || process.cwd())
     this.configs = null
     this.db = null
+    this.query = null
+    this.entityQuery = null
     this.server = createServer(this)
   }
 
@@ -30,9 +32,9 @@ class Hentity {
   }
 
   async bootstrap() {
-    console.log(this.entities)
     this.db = await createDatabase({ configs: this.configs, models: this.entities })
-    console.log(this.db.models)
+    this.query = this.db.query
+    this.entityQuery = this.db.entityQuery
     this.server.mount()
   }
 
@@ -43,7 +45,12 @@ class Hentity {
       // await buildAdmin({ cwd: this.dirs.cwd, configs: this.configs })
 
       this.server.listen()
-      return this
+
+
+      // console.log(hentity.services.api.book.book)
+      // console.log(this.entityQuery)
+
+      // console.log(await hentity.models.cates.findAll({ raw: false }))
     } catch (error) {
       console.log(error)
     }
@@ -101,6 +108,11 @@ class Hentity {
   entity(path) {
     return this.entitiesContainer.get(path)
   }
+
+  cErr(message) {
+    // createError
+    return { error: true, message }
+  }
 }
 
 module.exports = (options) => {
@@ -108,3 +120,4 @@ module.exports = (options) => {
   global.hentity = hentity
   return hentity
 }
+ 

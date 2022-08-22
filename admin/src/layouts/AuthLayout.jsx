@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
-import { BiData, BiEdit, BiFilm, BiWrench } from 'react-icons/bi'
+import { BiData, BiEdit, BiFilm, BiLowVision, BiWrench } from 'react-icons/bi'
 import { Loader, SideBar } from 'ui'
 
 function AuthLayout() {
@@ -22,18 +22,23 @@ function AuthLayout() {
 const menus = [
   {
     label: ['EntityManager', 'EntityManager'],
-    to: '/entity-manager',
+    to: '/entity_manager',
     icon: BiData,
   },
   {
     label: ['EntityBuilder', 'EntityBuilder'],
-    to: '/entity-builder',
+    to: '/entity_builder',
     icon: BiEdit,
   },
   {
     label: ['Upload', 'Upload'],
     to: '/upload',
     icon: BiFilm,
+  },
+  {
+    label: ['Permission', 'Permission'],
+    to: '/permission',
+    icon: BiLowVision,
   },
   {
     label: ['Settings', 'Settings'],

@@ -1,0 +1,21 @@
+{
+  "type": "collection",
+  "tableName": "books",
+  "singularName": "book",
+  "pluralName": "books",
+  "displayName": "book",
+  "attributes": [
+    {
+      "type": "string",
+      "columnName": "name",
+      "displayName": "name",
+      "required": true
+    },
+    {
+      "type": "integer",
+      "columnName": "price",
+      "displayName": "price",
+      "required": true
+    }
+  ]
+}

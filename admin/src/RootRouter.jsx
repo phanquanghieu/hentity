@@ -44,18 +44,18 @@ function RootRouter() {
               </ProtectedRoute>
             }
           >
-            <Route index element={<Navigate replace to='entity-manager' />} />
-            <Route path='entity-manager' element={<EntityManagerLayout />}>
+            <Route index element={<Navigate replace to='entity_manager' />} />
+            <Route path='entity_manager' element={<EntityManagerLayout />}>
               <Route index element={<IndexPage />} />
-              <Route path='collection-type/:entityUid' element={<EntityManagerLayout />} />
-              <Route path='single-type/:entityUid' element={<EntityManagerLayout />} />
+              <Route path='collection_type/:singularName' element={<EntityManagerLayout />} />
+              <Route path='single_type/:singularName' element={<EntityManagerLayout />} />
             </Route>
-            <Route path='entity-builder' element={<EntityBuilderLayout />}>
-              <Route index element={<BuilderHome />} />
-              <Route path='entity/:entityUid' element={<BuilderEntity />} />
-              <Route path='entity/create' element={<CreateEntity />} />
-              <Route path='component/:componentUid' element={<BuilderComponent />} />
-              <Route path='component/create' element={<CreateComponent />} />
+            <Route path='entity_builder' element={<EntityBuilderLayout />}>
+              <Route index element={<Navigate to='entity' />} />
+              <Route path='entity/:singularName' element={<BuilderEntity />} />
+              <Route path='entity' element={<CreateEntity />} />
+              <Route path='component/:singularName' element={<BuilderComponent />} />
+              <Route path='component' element={<CreateComponent />} />
             </Route>
             <Route path='upload' element={<Upload />} />
             {/* <Route path='settings' element={<SettingsLayout />} >

@@ -1,24 +1,38 @@
-import React, { useState } from 'react'
-import { Button, Modal } from 'ui'
-import { cloneDeep } from 'lodash'
-import { ATTRIBUTES } from 'constant/attributes'
-import AttributeEditor from './AttributeEditor'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  getAttributeEdit,
+  setAttributeEdit,
+  setShowModalAttribute,
+} from 'redux/slices/entityBuilderSlice'
 import { useFormatMessage } from 'hooks'
 
-function ModalAttributes({ attributeEdit = {}, show, onClose }) {
-  const [attribute, setAttribute] = useState(cloneDeep(attributeEdit))
+import { Modal } from 'ui'
+import AttributeBuilder from './AttributeBuilder'
+import { ATTRIBUTES } from 'constant/attributes'
 
+function ModalAttributes() {
+  const attributeEdit = useSelector(getAttributeEdit)
+
+  const dispatch = useDispatch()
   const t = useFormatMessage()
+
   return (
-    <Modal show={show} header='Select' className='my-0 md:my-6 lg:my-20' onClose={onClose}>
-      <div className='p-6 overflow-auto'>
-        {!attribute.type && (
+    <Modal
+      header={attributeEdit.type ? t('Edit Attribute') : t('Choose Attribute Type')}
+      className='mt-0 md:mt-8 lg:mt-16'
+      show={true}
+      onClose={() => dispatch(setShowModalAttribute(false))}
+    >
+      {!attributeEdit.type && (
+        <div className='p-6 overflow-auto'>
           <div className='grid grid-cols-3 gap-4'>
             {Object.values(ATTRIBUTES).map((ATTRIBUTE) => (
               <div
                 className='h-14 px-4 border rounded-md shadow flex items-center cursor-pointer
                   hover:bg-base-100 hover:shadow-md'
-                onClick={() => setAttribute({ ...ATTRIBUTE.model })}
+                onClick={() => dispatch(setAttributeEdit({ ...ATTRIBUTE.model }))}
+                key={ATTRIBUTE.info.label}
               >
                 <div>
                   <ATTRIBUTE.info.icon />
@@ -30,23 +44,11 @@ function ModalAttributes({ attributeEdit = {}, show, onClose }) {
               </div>
             ))}
           </div>
-        )}
-        {attribute.type && (
-          <AttributeEditor
-            attribute={attribute}
-            onChangeAttribute={(_attribute) => setAttribute({ ...attribute, ..._attribute })}
-          />
-        )}
-      </div>
-      {attribute.type && (
-        <div className='px-5 py-4 border-t flex justify-between'>
-          <Button>{t('Cancel')}</Button>
-          <div>
-            <Button className='mr-5 bg-white text-base-500' color='base'>
-              {t('Add another field')}
-            </Button>
-            <Button color='base'>{t('Finish')}</Button>
-          </div>
+        </div>
+      )}
+      {attributeEdit.type && (
+        <div className='overflow-auto'>
+          <AttributeBuilder />
         </div>
       )}
     </Modal>

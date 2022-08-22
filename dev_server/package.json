@@ -1,0 +1,11 @@
+{
+  "name": "dev_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js --watch ../ --ignore ../admin"
+  },
+  "author": "",
+  "license": "ISC"
+}
