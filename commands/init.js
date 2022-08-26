@@ -17,6 +17,7 @@ const createPackageJSONFile = () => {
   const packageJSON = require(resolve('package.json'))
 
   set(packageJSON, 'scripts.start', 'hentity start')
+  set(packageJSON, 'scripts.develop', 'hentity develop')
 
   return packageJSON
 }

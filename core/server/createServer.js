@@ -28,6 +28,9 @@ module.exports = (hentity) => {
       app.get(`${adminPath}/*`, (_, res) => {
         res.sendFile(path.resolve(buildPath, 'index.html'))
       })
+      app.get('/',(_,res)=>{
+        res.redirect('/admin')
+      })
 
       // app.get('/admin_api/api', (req, res) => {
       //   console.log(req)
@@ -46,7 +49,9 @@ module.exports = (hentity) => {
       // console.log(hentity.all.routesContainer.api)
       // console.log(hentity.all.controllersContainer.api)
       // console.log(process)
-      return app.listen(9322, () => console.log('Running on\nhttp://localhost:9322/api'))
+      return app.listen(9322, () =>
+        console.log('Running on\nhttp://localhost:9322/api\nhttp://localhost:9322/admin')
+      )
     },
   }
 }

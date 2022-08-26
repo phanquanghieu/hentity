@@ -4,7 +4,7 @@ const { join } = require('path')
 
 module.exports = (env) => {
   return {
-    mode: 'production',
+    mode: env.ENV,
     entry: join(__dirname, 'src/index.jsx'),
     output: {
       path: join(__dirname, 'build'),
@@ -46,7 +46,7 @@ module.exports = (env) => {
         template: join(__dirname, 'src/index.html'),
       }),
       new webpack.DefinePlugin({
-        'process.env.ENV': JSON.stringify('production'),
+        'process.env.ENV': JSON.stringify(env.ENV),
         'process.env.BACKEND_URL': JSON.stringify(env.BACKEND_URL),
         'process.env.ADMIN_PATH': JSON.stringify(env.ADMIN_PATH),
       }),

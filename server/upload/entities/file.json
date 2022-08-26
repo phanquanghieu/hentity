@@ -4,6 +4,7 @@
   "singularName": "file",
   "pluralName": "files",
   "displayName": "File",
+  "hidden": true,
   "attributes": [
     { "columnName": "name", "type": "string", "configurable": false, "required": true },
     { "columnName": "alternativeText", "type": "string", "configurable": false },

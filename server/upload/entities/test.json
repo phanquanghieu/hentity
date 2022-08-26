@@ -4,7 +4,7 @@
   "singularName": "test",
   "pluralName": "tests",
   "displayName": "Test",
-  "hidden": false,
+  "hidden": true,
   "attributes": [
     { "columnName": "text_short", "type": "string" },
     { "columnName": "text_long", "type": "text" },

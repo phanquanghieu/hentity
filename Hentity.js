@@ -38,19 +38,14 @@ class Hentity {
     this.server.mount()
   }
 
-  async start() {
+  async start(isDevelopment) {
     try {
       await this.register()
       await this.bootstrap()
-      // await buildAdmin({ cwd: this.dirs.cwd, configs: this.configs })
+      await buildAdmin({ cwd: this.dirs.cwd, configs: this.configs }, isDevelopment)
 
       this.server.listen()
 
-
-      // console.log(hentity.services.api.book.book)
-      // console.log(this.entityQuery)
-
-      // console.log(await hentity.models.cates.findAll({ raw: false }))
     } catch (error) {
       console.log(error)
     }
@@ -120,5 +115,3 @@ module.exports = (options) => {
   global.hentity = hentity
   return hentity
 }
-
-    

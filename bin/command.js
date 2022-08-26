@@ -35,20 +35,6 @@ program.command('init').description('Init your Hentity application').action(getS
 
 program.command('start').description('Start your Hentity application').action(getScript('start'))
 
-// program
-//   .command('test')
-//   .description('Test your Hentity application')
-//   .action((projectDirectory, ...args) => {
-//     // console.log(process.cwd())
-//     const packageJSON = require(resolve('package.json'))
-//     set(packageJSON, 'script.start', 'hentity start')
-//     packageJSON.scripts.start = 'hentity start'
-//     fse.writeJSONSync(resolve('package.json'), packageJSON, {
-//       spaces: 2,
-//     })
-//     console.log(packageJSON)
-//     console.log(resolve())
-//     console.log('run test script')
-//   })
+program.command('develop').description('Develop your Hentity application').action(getScript('develop'))
 
 program.parseAsync(process.argv)
