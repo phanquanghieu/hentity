@@ -120,4 +120,5 @@ module.exports = (options) => {
   global.hentity = hentity
   return hentity
 }
- 
+
+    

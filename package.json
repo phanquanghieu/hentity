@@ -1,6 +1,6 @@
 {
   "name": "hentity",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Headless CMS",
   "main": "index.js",
   "bin": {

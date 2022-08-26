@@ -8,7 +8,7 @@ module.exports = [
   {
     method: 'PUT',
     path: '/entity_builder/entities',
-    handler: 'admin.entity_builder.entities.save',
+    handler: 'admin.entity_builder.entities.upsert',
     middlewares: [],
   },
   {

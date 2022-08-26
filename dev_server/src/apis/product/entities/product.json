@@ -1,0 +1,49 @@
+{
+  "type": "collection",
+  "tableName": "products",
+  "singularName": "product",
+  "pluralName": "products",
+  "displayName": "product",
+  "attributes": [
+    {
+      "type": "string",
+      "columnName": "name",
+      "displayName": "name",
+      "required": true
+    },
+    {
+      "type": "integer",
+      "columnName": "price",
+      "displayName": "price",
+      "required": true
+    },
+    {
+      "type": "email",
+      "columnName": "email",
+      "displayName": "email",
+      "unique": true
+    },
+    {
+      "type": "float",
+      "columnName": "float_numver",
+      "displayName": "float numver",
+      "defaultValue": 33.444
+    },
+    {
+      "type": "datetime",
+      "columnName": "date_ti_4444_c_ddd",
+      "displayName": "date ti4444c ddd"
+    },
+    {
+      "type": "boolean",
+      "columnName": "boolean_3",
+      "displayName": "boolean3"
+    },
+    {
+      "type": "time",
+      "columnName": "time_4",
+      "displayName": "time4",
+      "defaultValue": "05:44"
+    }
+  ]
+}

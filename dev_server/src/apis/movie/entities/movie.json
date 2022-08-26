@@ -1,0 +1,85 @@
+{
+  "type": "collection",
+  "tableName": "movies",
+  "singularName": "movie",
+  "pluralName": "movies",
+  "displayName": "movie",
+  "attributes": [
+    {
+      "type": "string",
+      "columnName": "string",
+      "displayName": "string"
+    },
+    {
+      "type": "text",
+      "columnName": "text",
+      "displayName": "text",
+      "defaultValue": "ddd"
+    },
+    {
+      "type": "password",
+      "columnName": "password",
+      "displayName": "password"
+    },
+    {
+      "type": "email",
+      "columnName": "email",
+      "displayName": "email"
+    },
+    {
+      "type": "integer",
+      "columnName": "integer",
+      "displayName": "integer"
+    },
+    {
+      "type": "biginteger",
+      "columnName": "biginteger",
+      "displayName": "biginteger"
+    },
+    {
+      "type": "float",
+      "columnName": "float",
+      "displayName": "float"
+    },
+    {
+      "type": "decimal",
+      "columnName": "december",
+      "displayName": "december"
+    },
+    {
+      "type": "date",
+      "columnName": "date",
+      "displayName": "date"
+    },
+    {
+      "type": "time",
+      "columnName": "time",
+      "displayName": "time"
+    },
+    {
+      "type": "datetime",
+      "columnName": "date_time",
+      "displayName": "date time"
+    },
+    {
+      "type": "json",
+      "columnName": "json",
+      "displayName": "Json"
+    },
+    {
+      "type": "enum",
+      "columnName": "enum",
+      "displayName": "enum",
+      "enum": [
+        "332",
+        "qad",
+        "5555"
+      ]
+    },
+    {
+      "type": "boolean",
+      "columnName": "bool",
+      "displayName": "bool"
+    }
+  ]
+}

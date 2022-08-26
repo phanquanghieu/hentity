@@ -35,6 +35,7 @@ const mountRoute = (router, route, hentity) => {
     coreMiddlewares.routeInfo(route),
     coreMiddlewares.authentication,
     coreMiddlewares.authorization,
+    coreMiddlewares.query,
     ...middlewares,
     handlerCatcher(handler)
   )

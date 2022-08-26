@@ -26,7 +26,7 @@ module.exports = async (connection, models, modelColumnCreator) => {
     // book.hasOne(author, { foreignKey: 'book_id' })
     // author.belongsTo(book, { foreignKey: 'book_id' })
 
-    await connection.sync({ force: true })
+    await connection.sync({ alter: true })
 
     // const bookI = await connection.models.book.create({ name: 'book1', price: 1000 })
     // await connection.models.book.create({ name: 'book2', price: 2000 })

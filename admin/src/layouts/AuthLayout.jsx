@@ -32,15 +32,15 @@ const menus = [
     to: '/upload',
     icon: BiFilm,
   },
-  // {
-  //   label: ['Permission', 'Permission'],
-  //   to: '/',
-  //   icon: BiLowVision,
-  // },
-  // {
-  //   label: ['Settings', 'Settings'],
-  //   to: '/',
-  //   icon: BiWrench,
-  // },
+  {
+    label: ['Permission', 'Permission'],
+    to: '/a',
+    icon: BiLowVision,
+  },
+  {
+    label: ['Settings', 'Settings'],
+    to: '/b',
+    icon: BiWrench,
+  },
 ]
 export default AuthLayout

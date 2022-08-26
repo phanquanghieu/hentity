@@ -11,15 +11,17 @@ module.exports = {
       saveApiFiles(apiPath, 'entities', singularName, entity),
       saveApiFiles(apiPath, 'routes', singularName, createDataApiFiles('routes', entity)),
       saveApiFiles(apiPath, 'controllers', singularName, createDataApiFiles('controllers', entity)),
-      saveApiFiles(apiPath, 'services', singularName, createDataApiFiles('controllers', entity)),
+      saveApiFiles(apiPath, 'services', singularName, createDataApiFiles('services', entity)),
       saveApiFiles(apiPath, 'middlewares'),
     ])
   },
+
   async updateApiFile(singularName, entity) {
     const apiPath = resolve(hentity.dirs.apis, singularName)
 
     await saveApiFiles(apiPath, 'entities', singularName, entity)
   },
+  
   async deleteApiFile(singularName) {
     const apiPath = resolve(hentity.dirs.apis, singularName)
     await fse.remove(apiPath)
