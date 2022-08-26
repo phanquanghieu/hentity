@@ -9,6 +9,7 @@ const ATTRIBUTES = {
       description: 'string',
       inputWidget: 'Input',
       inputWidgetType: 'text',
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'string',
@@ -29,6 +30,7 @@ const ATTRIBUTES = {
       description: 'text',
       inputWidget: 'Textarea',
       inputWidgetType: null,
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'text',
@@ -62,12 +64,13 @@ const ATTRIBUTES = {
   // },
   password: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconPassword,
       label: 'Password',
       valueType: 'password',
       description: 'password',
       inputWidget: 'Input',
       inputWidgetType: 'password',
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'password',
@@ -80,12 +83,13 @@ const ATTRIBUTES = {
   },
   email: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconEmail,
       label: 'Email',
       valueType: 'email',
       description: 'email',
       inputWidget: 'Input',
       inputWidgetType: 'email',
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'email',
@@ -99,12 +103,13 @@ const ATTRIBUTES = {
   },
   integer: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconNumber,
       label: 'Integer',
       valueType: 'number',
       description: 'integer',
       inputWidget: 'Input',
       inputWidgetType: 'number',
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'integer',
@@ -118,12 +123,13 @@ const ATTRIBUTES = {
   },
   biginteger: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconNumber,
       label: 'Biginteger',
       valueType: 'number',
       description: 'biginteger',
       inputWidget: 'Input',
       inputWidgetType: 'number',
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'biginteger',
@@ -137,12 +143,13 @@ const ATTRIBUTES = {
   },
   float: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconNumber,
       label: 'Float',
       valueType: 'number',
       description: 'float',
       inputWidget: 'Input',
       inputWidgetType: 'number',
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'float',
@@ -156,12 +163,13 @@ const ATTRIBUTES = {
   },
   decimal: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconNumber,
       label: 'Decimal',
       valueType: 'number',
       description: 'decimal',
       inputWidget: 'Input',
       inputWidgetType: 'number',
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'decimal',
@@ -175,12 +183,13 @@ const ATTRIBUTES = {
   },
   date: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconDatetime,
       label: 'Date',
       valueType: 'date',
       description: 'date',
       inputWidget: 'Input',
       inputWidgetType: 'date',
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'date',
@@ -194,12 +203,13 @@ const ATTRIBUTES = {
   },
   time: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconDatetime,
       label: 'Time',
       valueType: 'time',
       description: 'time',
       inputWidget: 'Input',
       inputWidgetType: 'time',
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'time',
@@ -213,12 +223,13 @@ const ATTRIBUTES = {
   },
   datetime: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconDatetime,
       label: 'Datetime',
       valueType: 'datetime',
       description: 'datetime',
       inputWidget: 'Input',
       inputWidgetType: 'datetime-local',
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'datetime',
@@ -232,12 +243,13 @@ const ATTRIBUTES = {
   },
   json: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconJson,
       label: 'Json',
       valueType: 'json',
       description: 'json',
       inputWidget: 'Json',
       inputWidgetType: null,
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'json',
@@ -250,12 +262,13 @@ const ATTRIBUTES = {
   },
   enum: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconEnum,
       label: 'Enum',
       valueType: 'enum',
       description: 'enum',
       inputWidget: 'Enum',
       inputWidgetType: null,
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'enum',
@@ -269,12 +282,13 @@ const ATTRIBUTES = {
   },
   boolean: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconBoolean,
       label: 'Boolean',
       valueType: 'boolean',
       description: 'boolean',
       inputWidget: 'Boolean',
       inputWidgetType: null,
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'boolean',
@@ -287,12 +301,13 @@ const ATTRIBUTES = {
   },
   relation: {
     info: {
-      icon: AttributeIcons.IconText,
+      icon: AttributeIcons.IconRelation,
       label: 'Relation',
       valueType: 'relation',
       description: 'Relation',
       inputWidget: 'Relation',
       inputWidgetType: null,
+      layout: { width: 'w-1/2' },
     },
     model: {
       type: 'relation',

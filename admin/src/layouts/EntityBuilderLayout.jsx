@@ -5,8 +5,6 @@ import { fetchEntities, getEntities } from 'redux/slices/entityBuilderSlice'
 import { filter, isEmpty } from 'lodash'
 import { Loader, SubSideBar } from 'ui'
 
-const header = ['Entity Builder', 'EntityBuilder']
-
 function EntityBuilderLayout() {
   const entities = useSelector(getEntities)
 
@@ -37,25 +35,19 @@ function EntityBuilderLayout() {
   }, [entities])
 
   return (
-    <div className='h-screen flex flex-1'>
-      <SubSideBar header={header} menus={menus} />
+    <>
+      <SubSideBar header={['Entity Builder', 'EntityBuilder']} menus={menus} />
 
-      {isEmpty(entities) ? (
-        <div className='h-screen flex-1'>
+      <div className='h-screen min-w-0 flex-1 flex'>
+        {isEmpty(entities) ? (
           <Loader />
-        </div>
-      ) : (
-        <Suspense
-          fallback={
-            <div className='h-screen flex-1'>
-              <Loader />
-            </div>
-          }
-        >
-          <Outlet />
-        </Suspense>
-      )}
-    </div>
+        ) : (
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+        )}
+      </div>
+    </>
   )
 }
 

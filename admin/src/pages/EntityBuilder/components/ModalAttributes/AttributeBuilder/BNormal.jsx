@@ -16,7 +16,7 @@ function BNormal({ control, errors, setValue }) {
   const ATTRIBUTE = ATTRIBUTES[attributeEdit.type]
   return (
     <div className='flex flex-wrap'>
-      <div className='w-1/2 px-3 pt-2'>
+      <div className='w-1/2 px-3 pt-2 pb-6'>
         <Controller
           name='displayName'
           defaultValue={attributeEdit.displayName}
@@ -37,7 +37,7 @@ function BNormal({ control, errors, setValue }) {
           )}
         />
       </div>
-      <div className='w-1/2 px-3 pt-2'>
+      <div className='w-1/2 px-3 pt-2 pb-6'>
         <Controller
           name='columnName'
           defaultValue={attributeEdit.columnName}
@@ -57,7 +57,7 @@ function BNormal({ control, errors, setValue }) {
         />
       </div>
       {has(attributeEdit, 'enum') && (
-        <div className='w-1/2 px-3 pt-2'>
+        <div className='w-1/2 px-3 pt-2 pb-6'>
           <Controller
             name='enum'
             defaultValue={attributeEdit.enum}
@@ -77,7 +77,7 @@ function BNormal({ control, errors, setValue }) {
         </div>
       )}
       {has(attributeEdit, 'defaultValue') && (
-        <div className='w-1/2 px-3 pt-2'>
+        <div className='w-1/2 px-3 pt-2 pb-6'>
           <Controller
             name='defaultValue'
             defaultValue={attributeEdit.defaultValue || ''}

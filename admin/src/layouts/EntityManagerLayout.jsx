@@ -1,25 +1,65 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchEntities, getEntities } from 'redux/slices/entityManagerSlice'
 import { Loader, SubSideBar } from 'ui'
+import { filter, isEmpty } from 'lodash'
 
 function EntityManagerLayout() {
+  const entities = useSelector(getEntities)
+
+  const [menus, setMenus] = useState(MENUS)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchEntities())
+  }, [])
+
+  useEffect(() => {
+    if (isEmpty(entities)) return
+
+    let _menus = [...menus]
+    _menus[0].links = filter(entities, ['type', 'collection']).map((collection) => ({
+      ...collection,
+      label: collection.displayName,
+      to: `collection/${collection.singularName}`,
+    }))
+    _menus[1].links = filter(entities, ['type', 'single']).map((single) => ({
+      ...single,
+      label: single.displayName,
+      to: `single/${single.singularName}`,
+    }))
+
+    setMenus(_menus)
+  }, [entities])
+
   return (
-    <div className='h-screen flex flex-1'>
-      <SubSideBar />
-      {/* <Suspense
-        fallback={
-          <div className='h-screen flex-1'>
-            <Loader />
-          </div>
-        }
-      >
-        <Outlet />
-      </Suspense> */}
-      <div className='h-screen flex-1'>
-        <Loader />
+    <>
+      <SubSideBar header={['Entity Manager', 'EntityManager']} menus={menus} />
+
+      <div className='h-screen min-w-0 flex-1 flex'>
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
       </div>
-    </div>
+    </>
   )
 }
 
 export default EntityManagerLayout
+
+const MENUS = [
+  {
+    label: ['Collection Types'],
+    links: [],
+  },
+  {
+    label: ['Single Types'],
+    links: [],
+  },
+  {
+    label: ['Components', null],
+    links: [],
+  },
+]

@@ -48,10 +48,10 @@ function CreateEntity() {
           </div>
         </Button>
       </div>
-      <div className='p-10'>
-        <div className='p-10 shadow-md rounded-md bg-white'>
+      <div className='p-8'>
+        <div className='p-8 shadow-md rounded-md bg-white'>
           <div className='flex flex-wrap'>
-            <div className='w-1/2 p-3'>
+            <div className='w-1/2 p-3 pb-6'>
               <Controller
                 name='displayName'
                 control={control}
@@ -76,8 +76,8 @@ function CreateEntity() {
                 )}
               />
             </div>
-            <div className='w-1/2 p-3' />
-            <div className='w-1/2 p-3'>
+            <div className='w-1/2 p-3 pb-6' />
+            <div className='w-1/2 p-3 pb-6'>
               <Controller
                 name='singularName'
                 control={control}
@@ -92,7 +92,7 @@ function CreateEntity() {
                 )}
               />
             </div>
-            <div className='w-1/2 p-3'>
+            <div className='w-1/2 p-3 pb-6'>
               <Controller
                 name='pluralName'
                 control={control}

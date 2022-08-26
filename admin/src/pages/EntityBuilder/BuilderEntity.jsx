@@ -34,29 +34,26 @@ function BuilderEntity() {
 
   const handleSaveEntity = async () => {
     setShowLoading(true)
-    const res = await axios.put('/entity_builder/entities', entityEdit, {})
-    console.log(res)
+    await axios.put('/entity_builder/entities', entityEdit)
 
     await sleep(1000)
-    await dispatch(fetchEntities())
-    setShowLoading(false)
+    window.location.reload()
   }
+  useEffect(() => setShowLoading(false), [entityEdit])
 
   const handleDeleteEntity = async () => {
     setShowLoading(true)
-    const res = await axios.delete(`/entity_builder/entities/${entityEdit.singularName}`)
-    console.log(res)
+    await axios.delete(`/entity_builder/entities/${entityEdit.singularName}`)
+
     await sleep(1000)
-    await dispatch(fetchEntities())
-    navigate('/entity_builder/entity')
-    setShowLoading(false)
+    window.location.reload()
   }
 
   if (isEmpty(entityEdit)) return
 
   return (
-    <div className='relative h-screen overflow-auto flex-1'>
-      <div className='sticky top-0 min-h-[4rem] px-6 shadow-md bg-white flex justify-between items-center'>
+    <div className='relative h-screen overflow-scroll flex-1 flex flex-col'>
+      <div className='sticky top-0 z-10 min-h-[4rem] px-6 shadow-md bg-white flex justify-between items-center'>
         <div className='font-bold text-2xl'>{entityEdit.displayName}</div>
         <div>
           <Button className='mr-6' onClick={handleDeleteEntity}>
@@ -73,63 +70,81 @@ function BuilderEntity() {
           </Button>
         </div>
       </div>
-      <div className='p-10'>
-        <div className='p shadow-md rounded-t-md text-slate-700 bg-white'>
-          <table className='w-full'>
-            <thead>
-              <tr className='text-left border-b-[1.5px] border-slate-200'>
-                <th className='w-1/3 px-4 py-3 font-medium'>Name</th>
-                <th className='w-1/3 px-4 py-3 font-medium'>Column</th>
-                <th className='w-1/3 px-4 py-3 font-medium'>Type</th>
-                <th className='px-4 py-3 font-medium'></th>
-              </tr>
-            </thead>
-            <tbody>
-              {entityEdit.attributes.map((attribute) => {
-                const ATTRIBUTE = ATTRIBUTES[attribute.type]
-                if (!ATTRIBUTE) return
-                return (
-                  <tr className='border-b border-slate-200' key={attribute.columnName}>
-                    <td className='px-4 py-3 font-bold flex'>
-                      <ATTRIBUTE.info.icon />
-                      <div className='ml-4'>{attribute.displayName || 'sss'}</div>
-                    </td>
-                    <td className='px-4 py-3'>{attribute.columnName}</td>
-                    <td className='px-4 py-3 italic'>{attribute.type}</td>
-                    <td className='px-4'>
-                      <div className='flex justify-end'>
-                        <BiPencil
-                          className='w-8 h-8 ml-2 p-1 rounded-full text-blue-500
+      <div className='p-8 min-w-0 flex-1 flex flex-col'>
+        <div className='relative'>
+          <div className='shadow-md rounded-t-md text-slate-700 bg-white overflow-auto'>
+            <table className='w-full'>
+              <thead>
+                <tr className='text-left border-b-[1.5px] border-slate-200 font-medium'>
+                  <th className='w-1/2 px-4'>
+                    <div className='h-12 flex items-center'> Name</div>
+                  </th>
+                  <th className='w-1/2 px-4'>
+                    <div className='h-12 flex items-center'> Column</div>
+                  </th>
+                  <th className='w-32 px-4'>
+                    <div className='h-12 w-32 flex items-center'> Type</div>
+                  </th>
+                  <th className='w-24'>
+                    <div className='w-24'></div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {entityEdit.attributes.map((attribute) => {
+                  const ATTRIBUTE = ATTRIBUTES[attribute.type]
+                  if (!ATTRIBUTE) return
+                  return (
+                    <tr className='border-b border-slate-200' key={attribute.columnName}>
+                      <td className='px-4'>
+                        <div className='h-12 flex items-center font-bold'>
+                          <ATTRIBUTE.info.icon />
+                          <div className='ml-4 whitespace-nowrap'>
+                            {attribute.displayName || 'sss'}
+                          </div>
+                        </div>
+                      </td>
+                      <td className='px-4'>
+                        <div className='h-12 flex items-center'>{attribute.columnName}</div>
+                      </td>
+                      <td className='px-4'>
+                        <div className='h-12 flex items-center italic'>{attribute.type}</div>
+                      </td>
+                      <td className='absolute right-0 px-2 border-l bg-white'>
+                        <div className='h-12 flex items-center'>
+                          <BiPencil
+                            className='w-8 h-8 p-1 rounded-full text-blue-500
                               hover:shadow hover:bg-blue-500 hover:text-white cursor-pointer'
-                          onClick={() => {
-                            dispatch(setAttributeEdit({ ...ATTRIBUTE.model, ...attribute }))
-                            dispatch(setShowModalAttribute(true))
-                          }}
-                        />
-                        <BiTrashAlt
-                          className='w-8 h-8 ml-2 p-1 rounded-full text-red-500
+                            onClick={() => {
+                              dispatch(setAttributeEdit({ ...ATTRIBUTE.model, ...attribute }))
+                              dispatch(setShowModalAttribute(true))
+                            }}
+                          />
+                          <BiTrashAlt
+                            className='w-8 h-8 ml-2 p-1 rounded-full text-red-500
                               hover:shadow hover:bg-red-500 hover:text-white cursor-pointer'
-                          onClick={() => {
-                            dispatch(deleteAttribute(attribute))
-                          }}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
-        <div
-          className='px-4 py-3 shadow-md rounded-b-md bg-base-100 text-base-500 flex items-center cursor-pointer hover:shadow-lg'
-          onClick={() => {
-            dispatch(setAttributeEdit({}))
-            dispatch(setShowModalAttribute(true))
-          }}
-        >
-          <BiPlus className='w-5 h-5 mr-2 rounded-full bg-base-400 text-white' />
-          <div>{t('Add other attribute')}</div>
+                            onClick={() => {
+                              dispatch(deleteAttribute(attribute))
+                            }}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div
+            className='px-4 py-3 shadow-md rounded-b-md bg-base-100 text-base-500 flex items-center cursor-pointer hover:shadow-lg'
+            onClick={() => {
+              dispatch(setAttributeEdit({}))
+              dispatch(setShowModalAttribute(true))
+            }}
+          >
+            <BiPlus className='w-5 h-5 mr-2 rounded-full bg-base-400 text-white' />
+            <div>{t('Add other attribute')}</div>
+          </div>
         </div>
       </div>
       {showModalAttribute && <ModalAttributes />}

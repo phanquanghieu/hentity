@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useFormatMessage } from 'hooks'
+import { toast } from 'react-toastify'
 import * as yup from 'yup'
 import { Button, Input } from 'ui'
 import { errorTransIds, local } from 'utils'
@@ -17,10 +18,10 @@ function Login() {
   const navigate = useNavigate()
   const t = useFormatMessage()
 
-
   const onSubmit = (data) => {
     local.setUser({ id: 2, name: 'admin' })
     local.setJwtToken('ddddd')
+    toast.success('Login success!')
     navigate('/')
   }
   return (
@@ -32,11 +33,11 @@ function Login() {
         Login to your Hentity account
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name='email'
-          control={control}
-          render={({ field }) => (
-            <div className='pb-2'>
+        <div className='pb-8'>
+          <Controller
+            name='email'
+            control={control}
+            render={({ field }) => (
               <Input
                 type='text'
                 label={t('Email', 'Email')}
@@ -44,22 +45,24 @@ function Login() {
                 required
                 {...field}
               />
-            </div>
-          )}
-        />
-        <Controller
-          name='password'
-          control={control}
-          render={({ field }) => (
-            <Input
-              type='password'
-              label={t('Password', 'Password')}
-              error={t(null, errors.password?.message)}
-              required
-              {...field}
-            />
-          )}
-        />
+            )}
+          />
+        </div>
+        <div className='pb-6'>
+          <Controller
+            name='password'
+            control={control}
+            render={({ field }) => (
+              <Input
+                type='password'
+                label={t('Password', 'Password')}
+                error={t(null, errors.password?.message)}
+                required
+                {...field}
+              />
+            )}
+          />
+        </div>
         <Button type='submit' color='base' className='w-full mt-6'>
           Login
         </Button>

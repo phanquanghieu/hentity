@@ -13,7 +13,19 @@ const initialState = {
 
 export const fetchEntities = createAsyncThunk(
   'entityBuilder/fetchEntities',
-  async () => (await axios.get('/entity_builder/entities'))?.data || []
+  async () =>
+    (
+      await axios.get('/entity_builder/entities', {
+        'axios-retry': {
+          retries: 1,
+          retryDelay: () => 2000,
+          retryCondition: () => true,
+          onRetry: () => {
+            window.location.reload()
+          },
+        },
+      })
+    )?.data || []
 )
 
 const entityBuilderSlice = createSlice({

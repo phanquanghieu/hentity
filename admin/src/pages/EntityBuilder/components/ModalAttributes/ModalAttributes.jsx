@@ -20,7 +20,7 @@ function ModalAttributes() {
   return (
     <Modal
       header={attributeEdit.type ? t('Edit Attribute') : t('Choose Attribute Type')}
-      className='mt-0 md:mt-8 lg:mt-16'
+      className='md:mt-8 lg:mt-16'
       show={true}
       onClose={() => dispatch(setShowModalAttribute(false))}
     >

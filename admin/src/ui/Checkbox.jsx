@@ -14,9 +14,11 @@ function Checkbox({ label, value, onChange, className }, ref) {
         id={id}
         type='checkbox'
       />
-      <label className='ml-2  text-slate-700' htmlFor={id}>
-        {label}
-      </label>
+      {label && (
+        <label className='ml-2  text-slate-700' htmlFor={id}>
+          {label}
+        </label>
+      )}
     </div>
   )
 }

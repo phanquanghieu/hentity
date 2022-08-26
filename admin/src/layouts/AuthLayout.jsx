@@ -7,15 +7,12 @@ function AuthLayout() {
   return (
     <div className='w-screen h-screen flex bg-slate-100'>
       <SideBar menus={menus} />
-      <Suspense
-        fallback={
-          <div className='h-screen flex-1'>
-            <Loader />
-          </div>
-        }
-      >
-        <Outlet />
-      </Suspense>
+
+      <div className='h-screen min-w-0 flex-1 flex'>
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
+      </div>
     </div>
   )
 }
@@ -35,15 +32,15 @@ const menus = [
     to: '/upload',
     icon: BiFilm,
   },
-  {
-    label: ['Permission', 'Permission'],
-    to: '/permission',
-    icon: BiLowVision,
-  },
-  {
-    label: ['Settings', 'Settings'],
-    to: '/settings',
-    icon: BiWrench,
-  },
+  // {
+  //   label: ['Permission', 'Permission'],
+  //   to: '/',
+  //   icon: BiLowVision,
+  // },
+  // {
+  //   label: ['Settings', 'Settings'],
+  //   to: '/',
+  //   icon: BiWrench,
+  // },
 ]
 export default AuthLayout

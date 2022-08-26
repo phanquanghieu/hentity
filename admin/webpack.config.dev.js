@@ -53,6 +53,7 @@ module.exports = {
     }),
     new ReactRefreshWebpackPlugin(),
     new webpack.DefinePlugin({
+      'process.env.ENV': JSON.stringify('development'),
       'process.env.BACKEND_URL': JSON.stringify('http://localhost:9322'),
       'process.env.ADMIN_PATH': JSON.stringify('/'),
     }),
