@@ -104,7 +104,7 @@ function ManagerCollection() {
           >
             <div className='flex items-center'>
               <BiPlus className='w-5 h-5 -ml-1 mr-1' />
-              <div>{t('Create new entity')}</div>
+              <div>{t('Create')}</div>
             </div>
           </Button>
         </div>

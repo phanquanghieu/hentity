@@ -7,6 +7,7 @@ module.exports = (connectionString) => {
       createdAt: 'created_at',
       updatedAt: 'updated_at',
     },
+    logging: false,
     operatorsAliases: {
       $and: Op.and,
       $or: Op.or,

@@ -86,7 +86,7 @@ function Select(
           <div
             className={twMerge(
               classNames(
-                `absolute top-1.5 w-full max-h-48 overflow-auto py-1 
+                `absolute z-10 top-1.5 w-full max-h-48 overflow-auto py-1 
               bg-white shadow-md rounded-md border border-slate-200 whitespace-nowrap 
                 transition scale-y-0 opacity-50 origin-top`,
                 { 'scale-y-100 opacity-100': showOptions }

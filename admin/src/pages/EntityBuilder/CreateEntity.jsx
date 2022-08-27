@@ -44,7 +44,7 @@ function CreateEntity() {
         <Button onClick={handleSubmit(onSubmit)} color='base'>
           <div className='flex items-center'>
             <BiCheck className='w-5 h-5 -ml-1 mr-1' />
-            <div>{t('Create')}</div>
+            <div>{t('Create new Entity')}</div>
           </div>
         </Button>
       </div>

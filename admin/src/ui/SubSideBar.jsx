@@ -6,6 +6,7 @@ import { BsDot } from 'react-icons/bs'
 import { twMerge } from 'tailwind-merge'
 import classNames from 'classnames'
 import { upperCase } from 'lodash'
+import { isDevelopment } from 'utils'
 
 function SubSideBar({ header = [], menus = [] }) {
   const t = useFormatMessage()
@@ -60,7 +61,7 @@ function Collapse({ menu }) {
           </NavLink>
         ))}
       </div>
-      {process.env.ENV === 'development' && menu.action && (
+      {isDevelopment() && menu.action && (
         <NavLink to={menu.action.to} state={menu.action.state}>
           <div className='py-2 px-6 text-xs text-base-500 flex items-center hover:bg-slate-100'>
             <BiPlus className='w-4 h-5 mr-1 pb-0.5' />

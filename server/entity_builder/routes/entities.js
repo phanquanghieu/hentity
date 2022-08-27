@@ -9,12 +9,12 @@ module.exports = [
     method: 'PUT',
     path: '/entity_builder/entities',
     handler: 'admin.entity_builder.entities.upsert',
-    middlewares: [],
+    middlewares: ['admin.entity_builder.is_development'],
   },
   {
     method: 'DELETE',
     path: '/entity_builder/entities/:singularName',
     handler: 'admin.entity_builder.entities.delete',
-    middlewares: [],
+    middlewares: ['admin.entity_builder.is_development'],
   },
 ]

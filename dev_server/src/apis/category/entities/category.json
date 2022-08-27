@@ -1,0 +1,14 @@
+{
+  "type": "collection",
+  "tableName": "categories",
+  "singularName": "category",
+  "pluralName": "categories",
+  "displayName": "Category",
+  "attributes": [
+    {
+      "type": "string",
+      "columnName": "name",
+      "displayName": "name"
+    }
+  ]
+}

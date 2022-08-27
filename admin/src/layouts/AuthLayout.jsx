@@ -34,12 +34,12 @@ const menus = [
   },
   {
     label: ['Permission', 'Permission'],
-    to: '/a',
+    to: '/permission',
     icon: BiLowVision,
   },
   {
     label: ['Settings', 'Settings'],
-    to: '/b',
+    to: '/settings',
     icon: BiWrench,
   },
 ]

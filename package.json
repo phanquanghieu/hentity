@@ -1,6 +1,6 @@
 {
   "name": "hentity",
-  "version": "2.2.0",
+  "version": "2.2.2",
   "description": "Headless CMS",
   "main": "index.js",
   "bin": {
@@ -10,10 +10,10 @@
     "bin": "./bin"
   },
   "scripts": {
-    "dev":"npm-run-all --parallel dev_be dev_fe",
-    "dev_fe": "cd admin && npm run dev",
-    "dev_be": "cd dev_server && npm run dev",
-    "dev_db": "nodemon dev_database.js"
+    "hdev": "npm-run-all --parallel hdev_be hdev_fe",
+    "hdev_fe": "cd admin && npm run hdev",
+    "hdev_be": "cd dev_server && npm run hdev",
+    "hdev_db": "nodemon dev_database.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/phanquanghieu/hentity#readme",
   "dependencies": {
+    "chokidar": "^3.5.3",
     "commander": "^9.4.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
@@ -53,6 +54,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "nodemon": "^2.0.19",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1"
   }
 }

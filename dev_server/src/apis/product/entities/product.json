@@ -3,47 +3,47 @@
   "tableName": "products",
   "singularName": "product",
   "pluralName": "products",
-  "displayName": "product",
+  "displayName": "Product",
   "attributes": [
     {
       "type": "string",
       "columnName": "name",
-      "displayName": "name",
-      "required": true
+      "displayName": "Name"
     },
     {
-      "type": "integer",
+      "type": "biginteger",
       "columnName": "price",
-      "displayName": "price",
-      "required": true
+      "displayName": "Price"
     },
     {
-      "type": "email",
-      "columnName": "email",
-      "displayName": "email",
-      "unique": true
+      "type": "text",
+      "columnName": "description",
+      "displayName": "Description"
     },
     {
-      "type": "float",
-      "columnName": "float_numver",
-      "displayName": "float numver",
-      "defaultValue": 33.444
-    },
-    {
-      "type": "datetime",
-      "columnName": "date_ti_4444_c_ddd",
-      "displayName": "date ti4444c ddd"
+      "type": "json",
+      "columnName": "detail",
+      "displayName": "Detail"
     },
     {
       "type": "boolean",
-      "columnName": "boolean_3",
-      "displayName": "boolean3"
+      "columnName": "active",
+      "displayName": "Active"
     },
     {
-      "type": "time",
-      "columnName": "time_4",
-      "displayName": "time4",
-      "defaultValue": "05:44"
+      "type": "date",
+      "columnName": "publish_date",
+      "displayName": "Publish date"
+    },
+    {
+      "type": "enum",
+      "columnName": "type",
+      "displayName": "Type",
+      "enum": [
+        "type 1",
+        "type 2",
+        "type 3"
+      ]
     }
   ]
 }

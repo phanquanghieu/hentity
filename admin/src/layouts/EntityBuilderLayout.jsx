@@ -9,11 +9,14 @@ function EntityBuilderLayout() {
   const entities = useSelector(getEntities)
 
   const [menus, setMenus] = useState(MENUS)
-
+  const [isLoading, setIsLoading] = useState(true)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchEntities())
+      .unwrap()
+      .then(() => setIsLoading(false))
+      .catch(() => setIsLoading(false))
   }, [])
 
   useEffect(() => {
@@ -39,7 +42,7 @@ function EntityBuilderLayout() {
       <SubSideBar header={['Entity Builder', 'EntityBuilder']} menus={menus} />
 
       <div className='h-screen min-w-0 flex-1 flex'>
-        {isEmpty(entities) ? (
+        {isLoading ? (
           <Loader />
         ) : (
           <Suspense fallback={<Loader />}>
@@ -78,9 +81,6 @@ const MENUS = [
       label: ['Create new Component'],
       to: 'component',
     },
-    links: [
-      { label: 'c', to: 'component/c' },
-      { label: 'c2', to: 'component/c2' },
-    ],
+    links: [],
   },
 ]

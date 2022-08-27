@@ -3,10 +3,7 @@ import classNames from 'classnames'
 import { twMerge } from 'tailwind-merge'
 import { pick } from 'lodash'
 
-function Input(
-  { label, error, required, value = '', onChange, onBlur, className, type, ...rest },
-  ref
-) {
+function Input({ label, error, required, value = '', onChange, onBlur, className, ...rest }, ref) {
   const [valueInner, setValueInner] = useState(value)
   const id = useId()
 
@@ -43,7 +40,7 @@ function Input(
         onBlur={onBlur}
         ref={ref}
         id={id}
-        {...pick(rest, ['type', 'name', 'required', 'readOnly', 'placeholder', 'disabled'])}
+        {...pick(rest, ['type', 'name', 'readOnly', 'placeholder', 'disabled'])}
       />
       <div className='relative'>
         <div

@@ -28,29 +28,23 @@ module.exports = (hentity) => {
       app.get(`${adminPath}/*`, (_, res) => {
         res.sendFile(path.resolve(buildPath, 'index.html'))
       })
-      app.get('/',(_,res)=>{
+      app.get('/', (_, res) => {
         res.redirect('/admin')
       })
-
-      // app.get('/admin_api/api', (req, res) => {
-      //   console.log(req)
-      //   const p = hentity.services.admin.core.jwt.verify()
-
-      //   res.ok(hentity.routes.admin)
-      // })
 
       mountRoutes(app, hentity)
 
       app.use(coreMiddlewares.errorHandler)
+      app.use(coreMiddlewares.notFound)
     },
 
     listen() {
-      // console.log(hentity.services.admin.core)
-      // console.log(hentity.all.routesContainer.api)
-      // console.log(hentity.all.controllersContainer.api)
-      // console.log(process)
-      return app.listen(9322, () =>
-        console.log('Running on\nhttp://localhost:9322/api\nhttp://localhost:9322/admin')
+      const port = hentity.configs.server.port
+      const adminPath = hentity.configs.admin.adminPath
+      return app.listen(port, () =>
+        console.log(
+          `Running on\nhttp://localhost:${port}/api\nhttp://localhost:${port}${adminPath}`
+        )
       )
     },
   }

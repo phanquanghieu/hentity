@@ -1,12 +1,12 @@
 import axios from 'axios'
-import axiosRetry from 'axios-retry'
+// import axiosRetry from 'axios-retry'
 import qs from 'qs'
 import local from './local'
 
 const instance = axios.create({ baseURL: process.env.BACKEND_URL + '/admin_api' })
-axiosRetry(instance, {
-  retries: 0,
-})
+// axiosRetry(instance, {
+//   retries: 0,
+// })
 
 instance.interceptors.request.use(
   (config) => {

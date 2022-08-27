@@ -14,7 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button } from 'ui'
 import { has } from 'lodash'
-import { errorTransIds, yup } from 'utils'
+import { errorTransIds, isDevelopment, yup } from 'utils'
 import BNormal from './BNormal'
 import BRelation from './BRelation'
 import BSettings from './BSettings'
@@ -62,32 +62,34 @@ function AttributeBuilder() {
         )}
         <BSettings control={control} />
       </div>
-      <div className='px-5 py-4 border-t flex justify-between'>
-        <Button onClick={() => dispatch(setShowModalAttribute(false))}>{t('Cancel')}</Button>
-        <div>
-          <Button
-            className='mr-5 bg-white text-base-500'
-            color='base'
-            onClick={handleSubmit((_attribute) => {
-              if (isDuplicatedColumnName(_attribute.columnName)) return
-              dispatch(saveAttributeEdit(_attribute))
-              dispatch(setAttributeEdit({}))
-            })}
-          >
-            {t('Add another field')}
-          </Button>
-          <Button
-            onClick={handleSubmit((_attribute) => {
-              if (isDuplicatedColumnName(_attribute.columnName)) return
-              dispatch(saveAttributeEdit(_attribute))
-              dispatch(setShowModalAttribute(false))
-            })}
-            color='base'
-          >
-            {t('Finish')}
-          </Button>
+      {isDevelopment() && (
+        <div className='px-5 py-4 border-t flex justify-between'>
+          <Button onClick={() => dispatch(setShowModalAttribute(false))}>{t('Cancel')}</Button>
+          <div>
+            <Button
+              className='mr-5 bg-white text-base-500'
+              color='base'
+              onClick={handleSubmit((_attribute) => {
+                if (isDuplicatedColumnName(_attribute.columnName)) return
+                dispatch(saveAttributeEdit(_attribute))
+                dispatch(setAttributeEdit({}))
+              })}
+            >
+              {t('Add another field')}
+            </Button>
+            <Button
+              onClick={handleSubmit((_attribute) => {
+                if (isDuplicatedColumnName(_attribute.columnName)) return
+                dispatch(saveAttributeEdit(_attribute))
+                dispatch(setShowModalAttribute(false))
+              })}
+              color='base'
+            >
+              {t('Finish')}
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

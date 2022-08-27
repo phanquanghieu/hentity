@@ -2,10 +2,10 @@ const fse = require('fs-extra')
 const execa = require('execa')
 const path = require('path')
 
-const calcEnvVariables = (configs, isDevelopment) => {
+const calcEnvVariables = (configs, env) => {
   return [
     '--env',
-    `ENV=${isDevelopment ? 'development' : 'production'}`,
+    `ENV=${env}`,
     '--env',
     `ADMIN_PATH=${configs.admin.adminPath}`,
     '--env',
@@ -13,25 +13,39 @@ const calcEnvVariables = (configs, isDevelopment) => {
   ]
 }
 
-const buildAdmin = async ({ cwd, configs }, isDevelopment) => {
+const shouldBuildAdmin = (configs, env) => {
+  const cacheOldConfigsPath = path.resolve(__dirname, '.cache', 'oldConfigs')
+  fse.ensureFileSync(cacheOldConfigsPath)
+  const oldConfigsData = fse.readFileSync(cacheOldConfigsPath, { encoding: 'utf-8' })
+
+  const newConfigsData = configs.admin.adminPath + configs.server.backendUrl + env
+  if (oldConfigsData === newConfigsData) {
+    return false
+  }
+  fse.writeFileSync(cacheOldConfigsPath, newConfigsData)
+  return true
+}
+
+const buildAdmin = async ({ cwd, configs, env, forceBuildAmin = false }) => {
   try {
-    console.log(cwd, configs)
     const buildDir = path.resolve(cwd, 'build')
-    if (!fse.pathExistsSync(buildDir)) {
+
+    if (forceBuildAmin || shouldBuildAdmin(configs, env) || !fse.pathExistsSync(buildDir)) {
+      console.log('Build Admin Starting!')
       await fse.emptyDir(path.resolve(__dirname, 'build'))
 
       console.log('Installing...')
       await execa('yarn', ['install'], { cwd: __dirname })
 
       console.log('Building...')
-      await execa('yarn', ['build', ...calcEnvVariables(configs, isDevelopment)], {
+      await execa('yarn', ['build', ...calcEnvVariables(configs, env)], {
         cwd: __dirname,
       })
 
-      await fse.copy(path.join(__dirname, 'build'), path.join(buildDir))
-    }
+      await fse.copy(path.join(__dirname, 'build'), buildDir)
 
-    return console.log('Done!')
+      console.log('Build Admin Done!')
+    }
   } catch (error) {
     return console.error(error)
   }

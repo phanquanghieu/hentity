@@ -38,27 +38,16 @@ class Hentity {
     this.server.mount()
   }
 
-  async start(isDevelopment) {
+  async start({ env = 'development', forceBuildAdmin } = {}) {
     try {
+      process.env.ENV = env
       await this.register()
       await this.bootstrap()
-      await buildAdmin({ cwd: this.dirs.cwd, configs: this.configs }, isDevelopment)
+      await buildAdmin({ cwd: this.dirs.cwd, configs: this.configs, env, forceBuildAdmin })
 
       this.server.listen()
-
     } catch (error) {
       console.log(error)
-    }
-  }
-
-  get all() {
-    return {
-      apisContainer: this.apisContainer.getAll(),
-      routesContainer: this.routesContainer.getAll(),
-      middlewaresContainer: this.middlewaresContainer.getAll(),
-      controllersContainer: this.controllersContainer.getAll(),
-      servicesContainer: this.servicesContainer.getAll(),
-      entitiesContainer: this.entitiesContainer.getAll(),
     }
   }
 
@@ -105,7 +94,6 @@ class Hentity {
   }
 
   cErr(message) {
-    // createError
     return { error: true, message }
   }
 }
@@ -115,3 +103,4 @@ module.exports = (options) => {
   global.hentity = hentity
   return hentity
 }
+     

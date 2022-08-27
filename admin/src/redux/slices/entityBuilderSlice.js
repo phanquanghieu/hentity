@@ -16,14 +16,14 @@ export const fetchEntities = createAsyncThunk(
   async () =>
     (
       await axios.get('/entity_builder/entities', {
-        'axios-retry': {
-          retries: 1,
-          retryDelay: () => 2000,
-          retryCondition: () => true,
-          onRetry: () => {
-            window.location.reload()
-          },
-        },
+        // 'axios-retry': {
+        //   retries: 1,
+        //   retryDelay: () => 2000,
+        //   retryCondition: () => true,
+          // onRetry: () => {
+          //   window.location.reload()
+          // },
+        // },
       })
     )?.data || []
 )

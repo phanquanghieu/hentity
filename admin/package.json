@@ -1,10 +1,10 @@
 {
   "name": "admin",
-  "version": "2.2.0",
+  "version": "2.2.2",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server -c ./webpack.config.dev.js",
+    "hdev": "webpack-dev-server -c ./webpack.config.dev.js",
     "build": "webpack"
   },
   "author": "hieupq",
