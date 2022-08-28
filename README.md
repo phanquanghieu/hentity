@@ -5,6 +5,12 @@
 ##### Entity Builder
 
 <p align="center">
+  <a href="https://youtu.be/A7eVAIDYoYc">Demo video</a>
+</p>
+
+
+
+<p align="center">
   <img src="https://raw.githubusercontent.com/phanquanghieu/storage/master/hentity/hentity_entity_builder.png" alt="Entity Builder" />
 </p>
 
@@ -62,32 +68,32 @@
 
 4. Run project
 
-    Hentity provide two mode (production and develop) to run project
+   Hentity provide two mode (production and develop) to run project
 
-    - In develop mode you can design entity using Entity Builder
-    
-        Use command
+   - In develop mode you can design entity using Entity Builder
 
-        ```bash
-        hentity develop
-        ```
+     Use command
 
-        or
+     ```bash
+     hentity develop
+     ```
 
-        ```bash
-        npm run develop
-        ```
-    
-    - Production mode is optimize and you cann't design entity
-    
-        Use command
+     or
 
-        ```bash
-        hentity start
-        ```
+     ```bash
+     npm run develop
+     ```
 
-        or
+   - Production mode is optimize and you cann't design entity
 
-        ```bash
-        npm start
-        ```
+     Use command
+
+     ```bash
+     hentity start
+     ```
+
+     or
+
+     ```bash
+     npm start
+     ```
