@@ -2,7 +2,29 @@
 
 #### Hentity is a headless CMS help you design APIs fast, manage content easily.
 
+##### Entity Builder
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/phanquanghieu/storage/master/hentity/hentity_entity_builder.png" alt="Entity Builder" />
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/phanquanghieu/storage/master/hentity/hentity_entity_builder_2.png" alt="Entity Builder" />
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/phanquanghieu/storage/master/hentity/hentity_entity_builder_3.png" alt="Entity Builder" />
+</p>
+
+##### Entity Manager
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/phanquanghieu/storage/master/hentity/hentity_entity_manager.png" alt="Entity Manager" />
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/phanquanghieu/storage/master/hentity/hentity_entity_manager_2.png" alt="Entity Manager" />
+</p>
 
 ### Feature:
 
