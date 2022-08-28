@@ -6,6 +6,7 @@ import { changeQuery, getQuery } from 'redux/slices/entityManagerSlice'
 import Checkbox from './Checkbox'
 import Input from './Input'
 import Pagination from './Pagination'
+import Select from './Select'
 
 function Table({ columns, data, count, onClickEdit, onClickDelete }) {
   const query = useSelector(getQuery)
@@ -77,19 +78,13 @@ function Table({ columns, data, count, onClickEdit, onClickDelete }) {
       </div>
       <div className='mt-3 flex justify-between'>
         <div>
-          {/* <Input
-            type='number'
-            className='w-12 h-8 ml-1 pr-0 border-transparent shadow text-center'
-            value={page}
-            onBlur={(e) => {
-              let _page = Number(e.target.value) || page
-              if (_page < 1 || _page > pageCount) {
-                e.target.value = page
-                return
-              }
-              onChangePage(_page)
-            }}
-          /> */}
+          <Select
+            options={PAGE_SIZE_OPTIONS}
+            value={query.pageSize}
+            onChange={(_pageSize) => dispatch(changeQuery({ pageSize: _pageSize }))}
+            className='w-28 h-8 pr-0 border-transparent shadow'
+            isClearable={false}
+          />
         </div>
         <div>
           <Pagination
@@ -104,3 +99,11 @@ function Table({ columns, data, count, onClickEdit, onClickDelete }) {
 }
 
 export default React.memo(Table)
+
+const PAGE_SIZE_OPTIONS = [
+  { label: '5 / page', value: 5 },
+  { label: '10 / page', value: 10 },
+  { label: '20 / page', value: 20 },
+  { label: '50 / page', value: 50 },
+  { label: '100 / page', value: 100 },
+]

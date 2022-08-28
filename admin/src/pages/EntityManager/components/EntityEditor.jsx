@@ -87,19 +87,19 @@ function EntityEditor({ mode, attributesModel, dataEdit, onSaveData, onDeleteDat
             </div>
             <div className='mt-2 flex justify-between'>
               <div className='font-medium'>Created</div>
-              <div>dddd</div>
+              <div>pqh</div>
             </div>
             <div className='mt-2 flex justify-between'>
               <div className='font-medium'>By</div>
-              <div>dddd</div>
+              <div>pqh</div>
             </div>
             <div className='mt-2 flex justify-between'>
               <div className='font-medium'>Last update</div>
-              <div>dddd</div>
+              <div>pqh</div>
             </div>
             <div className='mt-2 flex justify-between'>
               <div className='font-medium'>By</div>
-              <div>dddd</div>
+              <div>pqh</div>
             </div>
           </div>
 

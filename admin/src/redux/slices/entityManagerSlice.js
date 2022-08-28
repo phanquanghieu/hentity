@@ -6,7 +6,7 @@ const initialState = {
   collectionEntity: {},
   singleEntity: {},
   components: [],
-  query: { where: {}, page: 1, pageSize: 3 },
+  query: { where: {}, page: 1, pageSize: 10 },
 }
 
 export const fetchEntities = createAsyncThunk(

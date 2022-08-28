@@ -3,6 +3,7 @@ import Providers from 'providers'
 import getTranslations from 'translations'
 import { local } from 'utils'
 import RootRouter from 'RootRouter'
+import { has } from 'lodash'
 
 class HentityAdmin {
   constructor() {
@@ -18,7 +19,7 @@ class HentityAdmin {
 
   async init() {
     const theme = local.getTheme()
-    if (theme) this.theme = theme
+    if (has(theme, 'mode') && has(theme, 'baseColor')) this.theme = theme
 
     const lang = local.getLang()
     if (lang) this.language.lang = lang

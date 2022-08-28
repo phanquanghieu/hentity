@@ -40,8 +40,8 @@ function Select(
           <input
             ref={ref}
             className={twMerge(
-              `w-full px-2.5 py-[5px] bg-white
-              rounded-md shadow-sm border border-slate-300 
+              `w-full px-2.5 py-[5px] bg-white text-slate-700
+              rounded-md shadow-sm border border-slate-300
               focus:outline-none focus:border-base-500 group-hover:border-base-500 
               focus:ring-2 focus:ring-offset-2 focus:ring-base-500
               disabled:bg-slate-50 transition cursor-pointer`,
@@ -51,14 +51,14 @@ function Select(
               className
             )}
             value={value ? find(options, { value })?.label : ''}
-            onFocus={() => setShowOptions(true)}
+            onClick={() => setShowOptions(!showOptions)}
             readOnly={!isSearchable}
             id={id}
             {...pick(rest, ['placeholder', 'disabled'])}
           />
           {isClearable && !!value && (
             <div
-              className='absolute right-6 top-0 h-9 w-6 flex justify-center items-center cursor-pointer
+              className='absolute top-1/2 right-6 -translate-y-1/2 w-6 flex justify-center items-center cursor-pointer
             text-slate-600 hover:text-red-500'
               onClick={() => onChange(null)}
             >
@@ -66,7 +66,7 @@ function Select(
             </div>
           )}
           <div
-            className='absolute right-0 top-0 h-9 w-6 flex justify-center items-center cursor-pointer
+            className='absolute top-1/2 right-0 -translate-y-1/2 w-6 flex justify-center items-center cursor-pointer
           text-slate-600 hover:text-base-500'
             onClick={() => setShowOptions(true)}
           >

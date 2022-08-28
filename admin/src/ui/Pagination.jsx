@@ -4,7 +4,7 @@ import Input from './Input'
 
 function Pagination({ page, pageCount, onChangePage }) {
   return (
-    <div className='flex space-x-1 text-md text-slate-500'>
+    <div className='flex space-x-1 text-md text-slate-700'>
       {page !== 1 && (
         <div
           className='w-8 h-8 bg-white border shadow rounded-full flex justify-center items-center cursor-pointer hover:shadow-md'

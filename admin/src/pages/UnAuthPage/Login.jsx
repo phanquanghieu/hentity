@@ -43,6 +43,7 @@ function Login() {
                 label={t('Email', 'Email')}
                 error={t(null, errors.email?.message)}
                 required
+                placeholder={'Enter any email'}
                 {...field}
               />
             )}
@@ -58,6 +59,7 @@ function Login() {
                 label={t('Password', 'Password')}
                 error={t(null, errors.password?.message)}
                 required
+                placeholder={'Enter any password'}
                 {...field}
               />
             )}
