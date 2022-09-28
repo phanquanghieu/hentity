@@ -20,9 +20,9 @@ export const fetchEntities = createAsyncThunk(
         //   retries: 1,
         //   retryDelay: () => 2000,
         //   retryCondition: () => true,
-          // onRetry: () => {
-          //   window.location.reload()
-          // },
+        // onRetry: () => {
+        //   window.location.reload()
+        // },
         // },
       })
     )?.data || []
@@ -79,6 +79,8 @@ export const getEntityEdit = (state) => state.entityBuilder.entityEdit
 export const getAttributeEdit = (state) => state.entityBuilder.attributeEdit
 export const getAttributeEditIndex = (state) => state.entityBuilder.attributeEditIndex
 export const getShowModalAttribute = (state) => state.entityBuilder.showModalAttribute
+export const getCollectionEntities = (state) =>
+  state.entityBuilder.entities.filter((entity) => entity.type === 'collection')
 
 export const {
   setEntityEdit,

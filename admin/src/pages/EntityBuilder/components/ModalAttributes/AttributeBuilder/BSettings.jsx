@@ -11,7 +11,9 @@ function BSettings({ control }) {
   const t = useFormatMessage()
   return (
     <>
-      <div className='px-3 py-2 font-medium'>{t('Settings')}</div>
+      {has(attributeEdit, ['required', 'unique', 'private']) && (
+        <div className='px-3 py-2 font-medium'>{t('Settings')}</div>
+      )}
       <div className='pb-1 flex flex-wrap'>
         {has(attributeEdit, 'required') && (
           <div className='w-1/2 px-3'>

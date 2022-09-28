@@ -45,7 +45,7 @@ const handlerCatcher = (handler) => async (req, res, next) => {
   try {
     await handler(req, res, next)
   } catch (error) {
-    console.error(error)
-    res.badRequest(error)
+    console.log(error)
+    res.badRequest(error.message)
   }
 }

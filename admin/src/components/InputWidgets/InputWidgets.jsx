@@ -1,6 +1,7 @@
 import { Input, Textarea, Boolean } from 'ui'
 import Enum from './Enum'
 import Json from './Json'
+import Relation from './Relation'
 
 export default {
   Input,
@@ -8,4 +9,5 @@ export default {
   Enum,
   Boolean,
   Json,
+  Relation,
 }

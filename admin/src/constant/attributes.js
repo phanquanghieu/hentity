@@ -1,4 +1,4 @@
-import AttributeIcons from './AttributeIcons'
+import AttributeIcons from 'components/Icons/AttributeIcons'
 
 const ATTRIBUTES = {
   string: {
@@ -313,7 +313,11 @@ const ATTRIBUTES = {
       type: 'relation',
       columnName: '',
       displayName: '',
-      private: false,
+      relation: 'oneToOne',
+      association: 'hasOne',
+      reference: '',
+      referenceColumnName: '',
+      referenceDisplayName: '',
     },
   },
 }

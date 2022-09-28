@@ -7,7 +7,8 @@ const collectionType = ({ singularName }) => `module.exports = {
 
   async findOne(req, res) {
     const { id } = req.params
-    const result = await hentity.services.api.${singularName}.${singularName}.findOne(id)
+    const { query } = req
+    const result = await hentity.services.api.${singularName}.${singularName}.findOne(id, query)
     res.ok(result)
   },
 

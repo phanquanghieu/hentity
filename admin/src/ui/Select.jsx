@@ -1,16 +1,16 @@
-import classNames from 'classnames'
+import React, { useRef, useEffect, useId, useState } from 'react'
 import { useOnClickOutside } from 'hooks'
-import { find, pick } from 'lodash'
-import React, { useId, useState } from 'react'
-import { useRef } from 'react'
-import { BiChevronDown, BiX } from 'react-icons/bi'
 import { twMerge } from 'tailwind-merge'
+import classNames from 'classnames'
+import { find, pick } from 'lodash'
+import { BiChevronDown, BiX } from 'react-icons/bi'
 
 function Select(
   {
     options = [],
     value,
     onChange,
+    onChangeSearchValue,
     className,
     label,
     error,
@@ -21,11 +21,16 @@ function Select(
   },
   ref
 ) {
+  const [searchValue, setSearchValue] = useState(value)
   const [showOptions, setShowOptions] = useState(false)
 
   const containerRef = useRef()
   const id = useId()
-  useOnClickOutside(containerRef, () => setShowOptions(false))
+  useOnClickOutside(containerRef, () => {
+    setShowOptions(false)
+    setSearchValue(value)
+  })
+  useEffect(() => setSearchValue(value), [value])
 
   return (
     <div ref={containerRef} className='relative w-full flex flex-col'>
@@ -50,7 +55,13 @@ function Select(
               }),
               className
             )}
-            value={value ? find(options, { value })?.label : ''}
+            value={
+              isSearchable ? searchValue || '' : value ? find(options, { value })?.label || '' : ''
+            }
+            onChange={(e) => {
+              setSearchValue(e.target.value)
+              onChangeSearchValue?.(e.target.value)
+            }}
             onClick={() => setShowOptions(!showOptions)}
             readOnly={!isSearchable}
             id={id}
@@ -93,21 +104,25 @@ function Select(
               )
             )}
           >
-            {options.map((option) => (
-              <div
-                className={classNames(
-                  'px-2.5 py-1 text-slate-700 cursor-pointer hover:bg-base-100',
-                  { 'bg-base-100': option.value === value }
-                )}
-                onClick={() => {
-                  onChange(option.value)
-                  setShowOptions(false)
-                }}
-                key={option.value}
-              >
-                {option.label}
-              </div>
-            ))}
+            {options
+              .filter(
+                (option) => !isSearchable || !searchValue || option.label.includes(searchValue)
+              )
+              .map((option) => (
+                <div
+                  className={classNames(
+                    'px-2.5 py-1 text-slate-700 cursor-pointer hover:bg-base-100',
+                    { 'bg-base-100': option.value === value }
+                  )}
+                  onClick={() => {
+                    onChange(option.value)
+                    setShowOptions(false)
+                  }}
+                  key={option.value}
+                >
+                  {option.label}
+                </div>
+              ))}
           </div>
         </div>
       </div>

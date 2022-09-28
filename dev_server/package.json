@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "hdev": "nodemon index.js --watch ../ --ignore ../admin"
+    "hdev2": "nodemon index.js --watch ../ --ignore ../admin",
+    "hdev": "node index.js"
   },
   "author": "",
   "license": "ISC"

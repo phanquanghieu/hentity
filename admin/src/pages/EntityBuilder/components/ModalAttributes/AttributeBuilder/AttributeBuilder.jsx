@@ -36,8 +36,10 @@ function AttributeBuilder() {
     control,
     handleSubmit,
     formState: { errors },
+    getValues,
     setValue,
     setError,
+    watch,
   } = useForm({ resolver: yupResolver(attributeSchema), mode: 'onSubmit' })
 
   const dispatch = useDispatch()
@@ -56,7 +58,13 @@ function AttributeBuilder() {
     <>
       <div className='m-3'>
         {attributeEdit.type === 'relation' ? (
-          <BRelation />
+          <BRelation
+            control={control}
+            errors={errors}
+            setValue={setValue}
+            getValues={getValues}
+            watch={watch}
+          />
         ) : (
           <BNormal control={control} errors={errors} setValue={setValue} />
         )}

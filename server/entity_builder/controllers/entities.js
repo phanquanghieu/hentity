@@ -5,18 +5,14 @@ module.exports = {
 
   async upsert(req, res) {
     const entity = req.body
-    const checkExist = Object.values(hentity.entities).find(
-      (e) => e.singularName === entity.singularName
-    )
     res.ok(entity)
-    if (checkExist) await getService().entities.updateApiFile(entity.singularName, entity)
-    else await getService().entities.createApiFile(entity)
+    await getService().entities.upsertEntity(entity)
   },
 
   async delete(req, res) {
     const { singularName } = req.params
     res.ok(singularName)
-    await getService().entities.deleteApiFile(singularName)
+    await getService().entities.deleteEntity(singularName)
   },
 }
 

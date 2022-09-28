@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { BiChevronDown } from 'react-icons/bi'
 import Button from 'ui/Button'
 
-function Dropdown({ options = [], value, onChange, color, className }) {
+function Dropdown({ options = [], value, onChange, color, className }, ref) {
   const [show, setShow] = useState(false)
   const containerRef = useRef()
 
@@ -14,6 +14,7 @@ function Dropdown({ options = [], value, onChange, color, className }) {
   return (
     <div className='relative inline' ref={containerRef}>
       <Button
+        ref={ref}
         className={classNames('pr-1', className)}
         onClick={() => setShow(!show)}
         color={color}
@@ -25,7 +26,7 @@ function Dropdown({ options = [], value, onChange, color, className }) {
       </Button>
       <div
         className={twMerge(
-          `absolute right-0 mt-1.5 p-1 rounded-md shadow-md bg-white
+          `absolute right-0 z-40 mt-1.5 p-1 rounded-md shadow-md bg-white
           transition opacity-0 origin-top-right scale-50`,
           classNames({ 'opacity-100 scale-100': show })
         )}
@@ -50,4 +51,4 @@ function Dropdown({ options = [], value, onChange, color, className }) {
   )
 }
 
-export default Dropdown
+export default React.forwardRef(Dropdown)

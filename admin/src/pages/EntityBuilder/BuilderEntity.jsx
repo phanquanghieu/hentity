@@ -29,6 +29,7 @@ function BuilderEntity() {
   useEffect(() => {
     dispatch(setEntityEditBySingularName(singularName))
   }, [singularName])
+  useEffect(() => setShowLoading(false), [entityEdit])
 
   const handleSaveEntity = async () => {
     setShowLoading(true)
@@ -37,14 +38,13 @@ function BuilderEntity() {
     await sleep(1000)
     window.location.reload()
   }
-  useEffect(() => setShowLoading(false), [entityEdit])
 
   const handleDeleteEntity = async () => {
     setShowLoading(true)
     await axios.delete(`/entity_builder/entities/${entityEdit.singularName}`)
 
     await sleep(1000)
-    window.location.reload()
+    window.location.replace('/entity_builder/entity')
   }
 
   return (

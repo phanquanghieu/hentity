@@ -1,48 +1,63 @@
-const { set, cloneDeep } = require('lodash')
+const { set, cloneDeep, has } = require('lodash')
+const { calcMethodName } = require('../../utils/modelName')
 
-module.exports = (query, models) => (modelName) => {
+module.exports = (dbModels, models) => (modelName) => {
   const model = models[modelName]
   if (!model) throw Error(`Entity not exist: ${modelName}`)
 
-  const coreQuery = query[modelName]
+  const dbModel = dbModels[modelName]
   return {
     async find(params = {}) {
-      let options = cloneDeep(params)
-
-      return await coreQuery.findAll(options)
+      return await dbModel.findAll(params)
     },
 
     async findOne(id, params = {}) {
       let options = cloneDeep(params)
       set(options, 'where.id', id)
-      return await coreQuery.findOne(options)
+      console.log(options)
+      return await dbModel.findOne(options)
     },
 
     async count(params) {
-      let options = cloneDeep(params)
-      return await coreQuery.count(options)
+      return await dbModel.count(params)
     },
 
-    async create(data, params = {}) {
-      let options = cloneDeep(params)
-      return await coreQuery.create(data, options)
+    async create(data) {
+      const instance = await dbModel.create(data)
+
+      await setRelation(model, instance, data)
+
+      return true
     },
 
-    async update(id, data, params = {}) {
-      let options = cloneDeep(params)
-      set(options, 'where.id', id)
-      await coreQuery.update(data, options)
-      return await this.findOne(id)
+    async update(id, data) {
+      const instance = await this.findOne(id)
+      if (!instance) throw Error('Data not found')
+
+      await instance.update(data)
+
+      await setRelation(model, instance, data)
+
+      return true
     },
 
-    async upsert(data, params = {}) {
-      return (await coreQuery.upsert(data, params))[0]
+    async upsert(data) {
+      return (await dbModel.upsert(data))[0]
     },
 
-    async delete(id, params = {}) {
-      let options = cloneDeep(params)
-      set(options, 'where.id', id)
-      return await coreQuery.destroy(options)
+    async delete(id) {
+      return Boolean(await dbModel.destroy({ where: { id } }))
     },
+  }
+}
+
+const setRelation = async (model, instance, data) => {
+  const attributesRelation = model.attributes.filter((attribute) => attribute.type === 'relation')
+  for (let attributeRelation of attributesRelation) {
+    if (has(data, attributeRelation.columnName)) {
+      await instance[calcMethodName('set', attributeRelation.columnName)](
+        data[attributeRelation.columnName]
+      )
+    }
   }
 }

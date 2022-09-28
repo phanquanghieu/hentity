@@ -43,7 +43,7 @@ module.exports = (hentity) => {
       const adminPath = hentity.configs.admin.adminPath
       return app.listen(port, () =>
         console.log(
-          `Running on\nhttp://localhost:${port}/api\nhttp://localhost:${port}${adminPath}`
+          `Running on\nhttp://localhost:${port}/api\nhttp://localhost:${port}${adminPath}\n\n`
         )
       )
     },

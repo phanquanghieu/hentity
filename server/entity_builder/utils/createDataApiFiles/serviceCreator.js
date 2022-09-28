@@ -3,8 +3,8 @@ const collectionType = ({ singularName }) => `module.exports = {
     return await hentity.entityQuery('${singularName}').find(query)
   },
 
-  async findOne(id) {
-    return await hentity.entityQuery('${singularName}').findOne(id)
+  async findOne(id, query) {
+    return await hentity.entityQuery('${singularName}').findOne(id, query)
   },
 
   async create(data) {

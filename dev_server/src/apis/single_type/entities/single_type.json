@@ -1,0 +1,14 @@
+{
+  "type": "single",
+  "tableName": "single_types",
+  "singularName": "single_type",
+  "pluralName": "single_types",
+  "displayName": "single type",
+  "attributes": [
+    {
+      "type": "text",
+      "columnName": "xd",
+      "displayName": "xd"
+    }
+  ]
+}

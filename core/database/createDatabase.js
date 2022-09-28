@@ -13,12 +13,12 @@ module.exports = async (options) => {
   const connection = createConnection(options.configs.database.connectionString)
   await createModels(connection, models, modelColumnCreator)
 
-  const query = connection.models
-  const entityQuery = createEntityQuery(query, models)
+  const dbModels = connection.models
+  const entityQuery = createEntityQuery(dbModels, models)
 
   return {
     connection,
-    query,
+    query: dbModels,
     entityQuery,
   }
 }
