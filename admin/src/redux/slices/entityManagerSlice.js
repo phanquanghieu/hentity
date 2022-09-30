@@ -50,7 +50,7 @@ export const getSingleEntity = (state) => state.entityManager.singleEntity
 export const getComponents = (state) => state.entityManager.components
 export const getQuery = (state) => state.entityManager.query
 export const getEntityBySingularName = (singularName) => (state) =>
-  state.entityManager.entities.filter((entity) => entity.singularName === singularName)
+  state.entityManager.entities.find((entity) => entity.singularName === singularName)
 
 export const {
   setCollectionEntityBySingularName,

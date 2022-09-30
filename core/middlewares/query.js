@@ -1,4 +1,4 @@
-const { min } = require('lodash')
+const { min, has, get, set } = require('lodash')
 
 module.exports = (req, res, next) => {
   const { defaultLimit, maxLimit } = hentity.configs.api
@@ -9,5 +9,6 @@ module.exports = (req, res, next) => {
   const page = parseInt(req.query.page)
   req.query.offset = page && page > 0 ? (page - 1) * limit : parseInt(req.query.offset || 0)
 
+  if (!has(req.query, 'include')) set(req.query, 'include.all', true)
   next()
 }

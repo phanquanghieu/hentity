@@ -58,8 +58,8 @@ const MENUS = [
     label: ['Single Types'],
     links: [],
   },
-  {
-    label: ['Components', null],
-    links: [],
-  },
+  // {
+  //   label: ['Components', null],
+  //   links: [],
+  // },
 ]

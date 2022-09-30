@@ -1,4 +1,3 @@
-const { DataTypes } = require('sequelize')
 const { calcForeignKey, calcJunctionModelName } = require('../../utils/modelName')
 
 module.exports = async (connection, models, modelColumnCreator) => {
@@ -41,12 +40,14 @@ module.exports = async (connection, models, modelColumnCreator) => {
     // book.hasOne(author, { foreignKey: '__book_id', as: 'my_author' })
     // author.belongsTo(book, { foreignKey: '__book_id', as: 'my_book' })
 
-    await connection.sync({ force: true })
-
-    const book1 = await connection.models.book.create({ name: 'book1', price: 1000 })
-    const author1 = await connection.models.author.create({ name: 'author1' })
-    await connection.models.author.create({ name: 'author 2' })
-    await connection.models.book.create({ name: 'book2', price: 3000 })
+    await connection.sync({ alter: true })
+    // await connection.sync({ force: true })
+    
+    // const book1 = await connection.models.book.create({ name: 'book 1', price: 1000 })
+    // await connection.models.book.create({ name: 'book 2', price: 2000 })
+    // await connection.models.book.create({ name: 'book 3', price: 3000 })
+    // const author1 = await connection.models.author.create({ name: 'author 1' })
+    // await connection.models.author.create({ name: 'author 2' })
     // const authorI = await connection.models.author.create(
     //   {
     //     name: 'author1',

@@ -18,7 +18,7 @@ const BuilderComponent = React.lazy(() => import('pages/EntityBuilder/BuilderCom
 const CreateEntity = React.lazy(() => import('pages/EntityBuilder/CreateEntity'))
 const CreateComponent = React.lazy(() => import('pages/EntityBuilder/CreateComponent'))
 const Upload = React.lazy(() => import('pages/Upload'))
-const Permission = React.lazy(() => import('pages/Permission'))
+const Role = React.lazy(() => import('pages/Role'))
 const Settings = React.lazy(() => import('pages/Settings'))
 
 function RootRouter() {
@@ -66,8 +66,8 @@ function RootRouter() {
             </Route>
 
             <Route path='upload' element={<Upload />} />
-            <Route path='permission' element={<Permission />}/>
-            <Route path='settings' element={<Settings />}/>
+            <Route path='role' element={<Role />} />
+            <Route path='settings' element={<Settings />} />
           </Route>
 
           <Route path='/404' element={<NotFound />} />

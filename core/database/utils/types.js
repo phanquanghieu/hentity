@@ -1,5 +1,3 @@
-const { DataTypes } = require('sequelize')
-
 const KEY_TYPES = [
   'password',
   'email',
@@ -55,11 +53,8 @@ const TYPE_SCHEMAS = {
   boolean: { type: 'boolean', required: false, default: null, unique: false },
 }
 
-// const FIELD
-
 module.exports = {
   isNormal: (type) => KEY_NORMAL_TYPES.includes(type),
   isString: (type) => KEY_STRING_TYPES.includes(type),
   isNumber: (type) => KEY_NUMBER_TYPES.includes(type),
-  // isRelation: (type) => type === 'relation',
 }

@@ -33,8 +33,8 @@ const menus = [
     icon: BiFilm,
   },
   {
-    label: ['Permission', 'Permission'],
-    to: '/permission',
+    label: ['Role', 'Role'],
+    to: '/role',
     icon: BiLowVision,
   },
   {

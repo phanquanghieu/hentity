@@ -1,5 +1,5 @@
 import React from 'react'
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { getAttributeEdit } from 'redux/slices/entityBuilderSlice'
 import { Controller } from 'react-hook-form'
 import { useFormatMessage } from 'hooks'
@@ -80,7 +80,7 @@ function BNormal({ control, errors, setValue }) {
         <div className='w-1/2 px-3 pt-2 pb-6'>
           <Controller
             name='defaultValue'
-            defaultValue={attributeEdit.defaultValue || ''}
+            defaultValue={attributeEdit.defaultValue}
             control={control}
             render={({ field }) => (
               <InputBase

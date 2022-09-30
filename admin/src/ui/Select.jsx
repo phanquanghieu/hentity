@@ -21,17 +21,19 @@ function Select(
   },
   ref
 ) {
-  const [searchValue, setSearchValue] = useState(value)
+  const [searchValue, setSearchValue] = useState(value?.label)
   const [showOptions, setShowOptions] = useState(false)
 
   const containerRef = useRef()
   const id = useId()
   useOnClickOutside(containerRef, () => {
     setShowOptions(false)
-    setSearchValue(value)
+    setSearchValue(value?.label)
   })
-  useEffect(() => setSearchValue(value), [value])
-
+  useEffect(() => setSearchValue(value?.label), [value])
+  const optionsShow = options.filter(
+    (option) => !isSearchable || !searchValue || option.label.includes(searchValue)
+  )
   return (
     <div ref={containerRef} className='relative w-full flex flex-col'>
       {label && (
@@ -55,9 +57,7 @@ function Select(
               }),
               className
             )}
-            value={
-              isSearchable ? searchValue || '' : value ? find(options, { value })?.label || '' : ''
-            }
+            value={isSearchable ? searchValue || '' : value?.label || ''}
             onChange={(e) => {
               setSearchValue(e.target.value)
               onChangeSearchValue?.(e.target.value)
@@ -71,7 +71,10 @@ function Select(
             <div
               className='absolute top-1/2 right-6 -translate-y-1/2 w-6 flex justify-center items-center cursor-pointer
             text-slate-600 hover:text-red-500'
-              onClick={() => onChange(null)}
+              onClick={() => {
+                onChange(null)
+                onChangeSearchValue?.('')
+              }}
             >
               <BiX className='w-5 h-5' />
             </div>
@@ -104,25 +107,29 @@ function Select(
               )
             )}
           >
-            {options
-              .filter(
-                (option) => !isSearchable || !searchValue || option.label.includes(searchValue)
-              )
-              .map((option) => (
-                <div
-                  className={classNames(
-                    'px-2.5 py-1 text-slate-700 cursor-pointer hover:bg-base-100',
-                    { 'bg-base-100': option.value === value }
-                  )}
-                  onClick={() => {
-                    onChange(option.value)
-                    setShowOptions(false)
-                  }}
-                  key={option.value}
-                >
-                  {option.label}
-                </div>
-              ))}
+            {optionsShow.map((option) => (
+              <div
+                className={classNames(
+                  'px-2.5 py-1 text-slate-700 cursor-pointer hover:bg-base-100',
+                  { 'bg-base-100': option.value === value }
+                )}
+                onClick={() => {
+                  onChange(option)
+                  setShowOptions(false)
+                }}
+                key={option.value}
+              >
+                {option.label}
+              </div>
+            ))}
+            {!optionsShow.length && (
+              <div
+                className='px-2.5 py-1 text-slate-400 flex justify-center items-center cursor-pointer'
+                onClick={() => setShowOptions(false)}
+              >
+                No Options
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -13,7 +13,8 @@ module.exports = {
       params: { singularName },
       body,
     } = req
-    const results = await hentity.query[singularName].create(body)
+    // const results = await hentity.query[singularName].create(body)
+    const results = await hentity.entityQuery(singularName).create(body)
     res.ok(results)
   },
 
@@ -22,7 +23,8 @@ module.exports = {
       params: { singularName, id },
       body,
     } = req
-    const results = await hentity.query[singularName].update(body, { where: { id } })
+    // const results = await hentity.query[singularName].update(body, { where: { id } })
+    const results = await hentity.entityQuery(singularName).update(id, body)
     res.ok(results)
   },
 

@@ -32,7 +32,7 @@ function Input({ label, error, required, value = '', onChange, onBlur, className
           }),
           className
         )}
-        defaultValue={valueInner}
+        defaultValue={valueInner || ''}
         onChange={(e) => {
           setValueInner(e.target.value)
           onChange?.(e)

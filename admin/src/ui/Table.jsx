@@ -80,8 +80,10 @@ function Table({ columns, data, count, onClickEdit, onClickDelete }) {
         <div>
           <Select
             options={PAGE_SIZE_OPTIONS}
-            value={query.pageSize}
-            onChange={(_pageSize) => dispatch(changeQuery({ pageSize: _pageSize }))}
+            value={PAGE_SIZE_OPTIONS.find(
+              (PAGE_SIZE_OPTION) => PAGE_SIZE_OPTION.value === query.pageSize
+            )}
+            onChange={(_pageSize) => dispatch(changeQuery({ pageSize: _pageSize.value }))}
             className='w-28 h-8 pr-0 border-transparent shadow'
             isClearable={false}
           />

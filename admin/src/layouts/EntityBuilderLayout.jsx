@@ -75,12 +75,12 @@ const MENUS = [
     },
     links: [],
   },
-  {
-    label: ['Components', null],
-    action: {
-      label: ['Create new Component'],
-      to: 'component',
-    },
-    links: [],
-  },
+  // {
+  //   label: ['Components', null],
+  //   action: {
+  //     label: ['Create new Component'],
+  //     to: 'component',
+  //   },
+  //   links: [],
+  // },
 ]

@@ -33,9 +33,9 @@ function ManagerCollection() {
 
   const fetchData = async () => {
     const res = await axios.get(`/entity_manager/collection/${collectionEntity.singularName}`, {
-      params: query,
+      params: { ...query },
     })
-    setData(get(res, 'data', []))
+    setData(get(res, 'data') || [])
     setCount(get(res, 'metadata.count', 0))
   }
 
@@ -82,10 +82,12 @@ function ManagerCollection() {
 
   const columns = useMemo(
     () =>
-      collectionEntity.attributes?.map?.((attribute) => ({
-        name: attribute.displayName,
-        key: attribute.columnName,
-      })),
+      collectionEntity.attributes
+        ?.filter?.((attribute) => attribute.type !== 'relation')
+        ?.map?.((attribute) => ({
+          name: attribute.displayName,
+          key: attribute.columnName,
+        })),
     [collectionEntity]
   )
 
