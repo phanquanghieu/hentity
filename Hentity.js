@@ -32,7 +32,7 @@ class Hentity {
   }
 
   async bootstrap() {
-    this.db = await createDatabase({ configs: this.configs, models: this.entities })
+    this.db = await createDatabase(this, { configs: this.configs, models: this.entities })
     this.query = this.db.query
     this.entityQuery = this.db.entityQuery
     this.server.mount()
@@ -101,5 +101,6 @@ class Hentity {
 module.exports = (options) => {
   const hentity = new Hentity(options)
   global.hentity = hentity
+  global.h = hentity
   return hentity
 }

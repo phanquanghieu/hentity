@@ -1,7 +1,8 @@
-const { get, set, defaults } = require('lodash')
+const { get, set, defaults, pickBy } = require('lodash')
 
 module.exports = () => {
-  const routes = {}
+  let routes = {}
+  let routesMap = null
 
   return {
     get(path) {
@@ -12,15 +13,41 @@ module.exports = () => {
       return routes
     },
 
-    set(path, route) {
-      const routeType = path[0]
-      Object.values(route).forEach((subRoute) => {
-        subRoute.forEach((subR) => {
-          defaults(subR, { auth: { strategy: routeType }, type: routeType })
+    getRoutesMap() {
+      if (!routesMap) {
+        routesMap = {}
+        Object.keys(routes).forEach((routeTypeKey) => {
+          const routeType = routes[routeTypeKey]
+          Object.keys(routeType).forEach((routeFolderKey) => {
+            const routeFolder = routeType[routeFolderKey]
+            Object.keys(routeFolder).forEach((routeFileKey) => {
+              const routeFile = routeFolder[routeFileKey]
+              Object.keys(routeFile).forEach((actionKey) => {
+                const key = `${routeTypeKey}.${routeFolderKey}.${routeFileKey}.${actionKey}`
+                routesMap[key] = routeFile[actionKey]
+              })
+            })
+          })
+        })
+      }
+      return routesMap
+    },
+
+    getRoutesMapByType(routeType) {
+      if (!routesMap) this.getRoutesMap()
+      return pickBy(routesMap, (_, k) => k.startsWith(routeType))
+    },
+
+    set(path, routeFolder) {
+      Object.keys(routeFolder).forEach((routeFileKey) => {
+        const routeFile = routeFolder[routeFileKey]
+        Object.keys(routeFile).forEach((actionKey) => {
+          let action = routeFile[actionKey]
+          let [routeType, routeFolderKey] = path
+          defaults(action, { authStrategy: routeType, type: routeType, name: actionKey })
+          set(routes, [action.type, routeFolderKey, routeFileKey, actionKey], action)
         })
       })
-      set(routes, path, route)
-      return this
     },
   }
 }

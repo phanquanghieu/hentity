@@ -1,0 +1,46 @@
+{
+  "type": "collection",
+  "tableName": "users",
+  "singularName": "user",
+  "pluralName": "users",
+  "displayName": "User",
+  "attributes": [
+    {
+      "type": "string",
+      "columnName": "username",
+      "displayName": "Username"
+    },
+    {
+      "type": "email",
+      "columnName": "email",
+      "displayName": "Email"
+    },
+    {
+      "type": "password",
+      "columnName": "password",
+      "displayName": "Password",
+      "private": true
+    },
+    {
+      "type": "string",
+      "columnName": "reset_password_token",
+      "displayName": "Reset Password Token"
+    },
+    {
+      "type": "boolean",
+      "columnName": "is_blocked",
+      "displayName": "Is Blocked"
+    },
+    {
+      "type": "relation",
+      "columnName": "role",
+      "displayName": "Role",
+      "relation": "oneToMany",
+      "association": "belongsTo",
+      "reference": "role",
+      "referenceColumnName": "users",
+      "referenceDisplayName": "Users"
+    }
+  ],
+  "isAdminEntity": true
+}

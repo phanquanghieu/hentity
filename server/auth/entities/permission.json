@@ -1,0 +1,28 @@
+{
+  "type": "collection",
+  "tableName": "permissions",
+  "singularName": "permission",
+  "pluralName": "permissions",
+  "displayName": "Permission",
+  "attributes": [
+    {
+      "type": "string",
+      "columnName": "action",
+      "displayName": "Action",
+      "required": true,
+      "unique": true
+    },
+    {
+      "type": "relation",
+      "columnName": "roles",
+      "displayName": "Roles",
+      "relation": "manyToMany",
+      "association": "belongsToMany",
+      "reference": "role",
+      "referenceColumnName": "permissions",
+      "referenceDisplayName": "Permissions"
+    }
+  ],
+  "hidden": true,
+  "isAdminEntity": true
+}

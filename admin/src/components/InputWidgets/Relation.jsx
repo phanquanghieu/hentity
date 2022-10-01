@@ -79,7 +79,7 @@ function Relation(p, ref) {
                 key={v.value}
                 className='pl-3 pr-1 py-0.5 rounded border text-slate-700 flex justify-between items-center'
               >
-                <div>{v.label}</div>
+                <div className='overflow-hidden'>{v.label}</div>
                 <div onClick={() => handleDeleteValue(v.value)}>
                   <BiX className='h-5 w-5 rounded-full hover:bg-red-500 hover:text-white cursor-pointer transition' />
                 </div>

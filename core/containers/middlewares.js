@@ -1,7 +1,7 @@
 const { get, set } = require('lodash')
 
 module.exports = () => {
-  const middlewares = {}
+  let middlewares = {}
 
   return {
     get(path) {

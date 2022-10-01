@@ -3,10 +3,10 @@ const fse = require('fs-extra')
 const loadResourceFolder = require('./utils/loadResourceFolder')
 const { string } = require('../utils')
 
-module.exports = async (hentity) => {
+module.exports = async (h) => {
   try {
     const apis = {}
-    const apisFolders = await fse.readdir(hentity.dirs.apis, { withFileTypes: true })
+    const apisFolders = await fse.readdir(h.dirs.apis, { withFileTypes: true })
 
     for (const apisFolder of apisFolders) {
       if (!apisFolder.isDirectory()) continue
@@ -16,13 +16,13 @@ module.exports = async (hentity) => {
         throw new Error(`Entity name is not SnakeCase: ${apiName}`)
       }
 
-      const apiFolderData = await loadResourceFolder(path.join(hentity.dirs.apis, apiName))
+      const apiFolderData = await loadResourceFolder(path.join(h.dirs.apis, apiName))
 
       if (apiFolderData) {
         apis[apiName] = apiFolderData
       }
     }
-    hentity.apisContainer.set(apis)
+    h.apisContainer.set(apis)
   } catch (error) {
     console.error(error)
   }

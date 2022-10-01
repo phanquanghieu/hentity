@@ -28,7 +28,7 @@ module.exports = {
 const upsertApiFile = async (entities) => {
   const createApiFile = async (entity) => {
     const { singularName } = entity
-    const apiPath = resolve(hentity.dirs.apis, singularName)
+    const apiPath = resolve(h.dirs.apis, singularName)
 
     await Promise.all([
       saveApiFiles(apiPath, 'entities', singularName, entity),
@@ -39,16 +39,14 @@ const upsertApiFile = async (entities) => {
     ])
   }
   const updateApiFile = async (singularName, entity) => {
-    const apiPath = resolve(hentity.dirs.apis, singularName)
+    const apiPath = resolve(h.dirs.apis, singularName)
 
     await saveApiFiles(apiPath, 'entities', singularName, entity)
   }
 
   const promise = []
   for (let entity of entities) {
-    const checkExist = Object.values(hentity.entities).find(
-      (e) => e.singularName === entity.singularName
-    )
+    const checkExist = Object.values(h.entities).find((e) => e.singularName === entity.singularName)
     if (checkExist) promise.push(updateApiFile(entity.singularName, entity))
     else promise.push(createApiFile(entity))
   }
@@ -56,15 +54,15 @@ const upsertApiFile = async (entities) => {
 }
 
 const deleteApiFile = async (singularName) => {
-  const apiPath = resolve(hentity.dirs.apis, singularName)
+  const apiPath = resolve(h.dirs.apis, singularName)
   await fse.remove(apiPath)
 }
 
 const removeOldRelation = (singularName) => {
-  const oldEntities = Object.values(hentity.entities).filter(
-    (e) => !e.hidden && e.type === 'collection'
+  const oldEntities = Object.values(h.entities).filter(
+    (e) => !e.isAdminEntity && e.type === 'collection'
   )
-
+  // console.log(oldEntities)
   let _entities = cloneDeep(
     oldEntities.filter((oldEntity) => oldEntity.singularName !== singularName)
   )

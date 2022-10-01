@@ -4,7 +4,7 @@ module.exports = {
       params: { singularName },
       query = {},
     } = req
-    const results = await hentity.query[singularName].findAndCountAll(query)
+    const results = await h.query[singularName].findAndCountAll(query)
     res.ok(results.rows, { count: results.count })
   },
 
@@ -13,8 +13,7 @@ module.exports = {
       params: { singularName },
       body,
     } = req
-    // const results = await hentity.query[singularName].create(body)
-    const results = await hentity.entityQuery(singularName).create(body)
+    const results = await h.entityQuery(singularName).create(body)
     res.ok(results)
   },
 
@@ -23,14 +22,13 @@ module.exports = {
       params: { singularName, id },
       body,
     } = req
-    // const results = await hentity.query[singularName].update(body, { where: { id } })
-    const results = await hentity.entityQuery(singularName).update(id, body)
+    const results = await h.entityQuery(singularName).update(id, body)
     res.ok(results)
   },
 
   async delete(req, res) {
     const { singularName, id } = req.params
-    const results = await hentity.query[singularName].destroy({ where: { id } })
+    const results = await h.query[singularName].destroy({ where: { id } })
     res.ok(results)
   },
 }

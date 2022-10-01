@@ -8,13 +8,14 @@ module.exports = (dbModels, models) => (modelName) => {
   const dbModel = dbModels[modelName]
   return {
     async find(params = {}) {
-      return await dbModel.findAll(params)
+      let results = await dbModel.findAll(params)
+      console.log(results)
+      return results
     },
 
     async findOne(id, params = {}) {
       let options = cloneDeep(params)
       set(options, 'where.id', id)
-      console.log(options)
       return await dbModel.findOne(options)
     },
 

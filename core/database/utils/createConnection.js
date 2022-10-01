@@ -40,7 +40,7 @@ module.exports = (connectionString) => {
       $match: Op.match,
     },
   })
-  
+
   connection.query = function () {
     return Sequelize.prototype.query.apply(this, arguments).catch((err) => {
       console.log(err)

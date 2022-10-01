@@ -1,57 +1,63 @@
-const collectionType = ({ singularName, pluralName }) => `module.exports = [
-  {
+const collectionType = ({ singularName, pluralName }) => `module.exports = {
+  find: {
     method: 'GET',
     path: '/${pluralName}',
     handler: 'api.${singularName}.${singularName}.find',
-    middlewares: []
+    middlewares: [],
   },
-  {
+
+  findOne: {
     method: 'GET',
     path: '/${pluralName}/:id',
     handler: 'api.${singularName}.${singularName}.findOne',
-    middlewares: []
+    middlewares: [],
   },
-  {
+
+  create: {
     method: 'POST',
     path: '/${pluralName}',
     handler: 'api.${singularName}.${singularName}.create',
-    middlewares: []
+    middlewares: [],
   },
-  {
+
+  update: {
     method: 'PUT',
     path: '/${pluralName}/:id',
     handler: 'api.${singularName}.${singularName}.update',
-    middlewares: []
+    middlewares: [],
   },
-  {
+
+  delete: {
     method: 'DELETE',
     path: '/${pluralName}/:id',
     handler: 'api.${singularName}.${singularName}.delete',
-    middlewares: []
-  }
-]
+    middlewares: [],
+  },
+}
 `
 
-const singleType = ({ singularName }) => `module.exports = [
-  {
+const singleType = ({ singularName }) => `module.exports = {
+  find: {
     method: 'GET',
     path: '/${singularName}',
     handler: 'api.${singularName}.${singularName}.find',
-    middlewares: []
+    middlewares: [],
   },
-  {
+
+  upsert: {
     method: 'PUT',
     path: '/${singularName}',
     handler: 'api.${singularName}.${singularName}.upsert',
-    middlewares: []
+    middlewares: [],
   },
-  {
+
+  delete: {
     method: 'DELETE',
     path: '/${singularName}/:id',
     handler: 'api.${singularName}.${singularName}.delete',
-    middlewares: []
-  }
-]
+    middlewares: [],
+  },
+}
 `
 
 module.exports = (entity) => {

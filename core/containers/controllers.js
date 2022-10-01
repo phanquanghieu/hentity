@@ -1,7 +1,7 @@
 const { get, set } = require('lodash')
 
 module.exports = () => {
-  const controllers = {}
+  let controllers = {}
 
   return {
     get(path) {

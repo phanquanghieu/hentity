@@ -1,7 +1,7 @@
 const { has } = require('lodash')
 
 module.exports = () => {
-  const entities = {}
+  let entities = {}
 
   return {
     get(entityName) {
@@ -13,13 +13,12 @@ module.exports = () => {
     },
 
     set(_entities) {
-      for (const [entityName, entity] of Object.entries(_entities)) {
-        if (has(entityName, entities)) {
+      Object.keys(_entities).forEach((entityName) => {
+        if (has(entities, entityName)) {
           throw new Error(`Entity already exist: ${entityName}`)
         }
-        entities[entityName] = entity
-      }
-      return this
+        entities[entityName] = _entities[entityName]
+      })
     },
   }
 }

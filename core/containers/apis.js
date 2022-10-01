@@ -1,5 +1,5 @@
-module.exports = (hentity) => {
-  const apis = {}
+module.exports = (h) => {
+  let apis = {}
 
   return {
     get(apiName) {
@@ -12,11 +12,11 @@ module.exports = (hentity) => {
     set(_apis) {
       for (const [apiName, api] of Object.entries(_apis)) {
         apis[apiName] = api
-        if (api.entities) hentity.entitiesContainer.set(api.entities)
-        if (api.routes) hentity.routesContainer.set(['api', apiName], api.routes)
-        if (api.middlewares) hentity.middlewaresContainer.set(['api', apiName], api.middlewares)
-        if (api.controllers) hentity.controllersContainer.set(['api', apiName], api.controllers)
-        if (api.services) hentity.servicesContainer.set(['api', apiName], api.services)
+        if (api.entities) h.entitiesContainer.set(api.entities)
+        if (api.routes) h.routesContainer.set(['api', apiName], api.routes)
+        if (api.middlewares) h.middlewaresContainer.set(['api', apiName], api.middlewares)
+        if (api.controllers) h.controllersContainer.set(['api', apiName], api.controllers)
+        if (api.services) h.servicesContainer.set(['api', apiName], api.services)
       }
     },
   }

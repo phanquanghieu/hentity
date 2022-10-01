@@ -1,7 +1,7 @@
 const loadFolder = require('./utils/loadFolder')
 
-module.exports = async (hentity) => {
-  const globalMiddlewares = await loadFolder(hentity.dirs.middlewares)
+module.exports = async (h) => {
+  const globalMiddlewares = await loadFolder(h.dirs.middlewares)
 
-  hentity.middlewaresContainer.set('global', globalMiddlewares)
+  h.middlewaresContainer.set('global', globalMiddlewares)
 }

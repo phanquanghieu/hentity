@@ -1,14 +1,14 @@
 const path = require('path')
 const loadResourceFolder = require('./utils/loadResourceFolder')
 
-const featureNames = ['core', 'entity_builder', 'entity_manager', 'upload']
+const featureNames = ['core', 'entity_builder', 'entity_manager', 'upload', 'auth']
 
-module.exports = async (hentity) => {
+module.exports = async (h) => {
   const adminFeatures = {}
 
   for (const featureName of featureNames) {
     const resourceFolderData = await loadResourceFolder(
-      path.join(hentity.dirname, 'server', featureName)
+      path.join(h.dirname, 'server', featureName)
     )
 
     if (resourceFolderData) {
@@ -17,14 +17,14 @@ module.exports = async (hentity) => {
   }
 
   for (const [featureName, adminFeature] of Object.entries(adminFeatures)) {
-    if (adminFeature.entities) hentity.entitiesContainer.set(adminFeature.entities)
+    if (adminFeature.entities) h.entitiesContainer.set(adminFeature.entities)
     if (adminFeature.routes)
-      hentity.routesContainer.set(['admin', featureName], adminFeature.routes)
+      h.routesContainer.set(['admin', featureName], adminFeature.routes)
     if (adminFeature.middlewares)
-      hentity.middlewaresContainer.set(['admin', featureName], adminFeature.middlewares)
+      h.middlewaresContainer.set(['admin', featureName], adminFeature.middlewares)
     if (adminFeature.controllers)
-      hentity.controllersContainer.set(['admin', featureName], adminFeature.controllers)
+      h.controllersContainer.set(['admin', featureName], adminFeature.controllers)
     if (adminFeature.services)
-      hentity.servicesContainer.set(['admin', featureName], adminFeature.services)
+      h.servicesContainer.set(['admin', featureName], adminFeature.services)
   }
 }

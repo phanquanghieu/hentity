@@ -3,11 +3,11 @@ const { toLower } = require('lodash')
 
 module.exports = {
   sign(payload) {
-    return jwt.sign(payload, hentity.configs.api.jwtSecret)
+    return jwt.sign(payload, h.configs.api.jwtSecret)
   },
   verify(token) {
     try {
-      return jwt.verify(token, hentity.configs.api.jwtSecret)
+      return jwt.verify(token, h.configs.api.jwtSecret)
     } catch (error) {
       return null
     }

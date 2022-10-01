@@ -1,0 +1,46 @@
+{
+  "type": "collection",
+  "tableName": "roles",
+  "singularName": "role",
+  "pluralName": "roles",
+  "displayName": "Role",
+  "attributes": [
+    {
+      "type": "string",
+      "columnName": "name",
+      "displayName": "Name"
+    },
+    {
+      "type": "text",
+      "columnName": "description",
+      "displayName": "Description"
+    },
+    {
+      "type": "string",
+      "columnName": "type",
+      "displayName": "Type"
+    },
+    {
+      "type": "relation",
+      "columnName": "users",
+      "displayName": "Users",
+      "relation": "oneToMany",
+      "association": "hasMany",
+      "reference": "user",
+      "referenceColumnName": "role",
+      "referenceDisplayName": "Role"
+    },
+    {
+      "type": "relation",
+      "columnName": "permissions",
+      "displayName": "Permissions",
+      "relation": "manyToMany",
+      "association": "belongsToMany",
+      "reference": "permission",
+      "referenceColumnName": "roles",
+      "referenceDisplayName": "Roles"
+    }
+  ],
+  "hidden": true,
+  "isAdminEntity": true
+}

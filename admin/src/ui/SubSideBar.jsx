@@ -8,7 +8,7 @@ import classNames from 'classnames'
 import { upperCase } from 'lodash'
 import { isDevelopment } from 'utils'
 
-function SubSideBar({ header = [], menus = [] }) {
+function SubSideBar({ header = [], menus = [], isCollapsible = true }) {
   const t = useFormatMessage()
 
   return (
@@ -18,14 +18,14 @@ function SubSideBar({ header = [], menus = [] }) {
       </div>
       <div className='h-[calc(100%-4rem)] mb-4 overflow-auto'>
         {menus.map((menu, index) => (
-          <Collapse menu={menu} key={index} />
+          <Collapse menu={menu} key={index} isCollapsible={isCollapsible} />
         ))}
       </div>
     </div>
   )
 }
 
-function Collapse({ menu }) {
+function Collapse({ menu, isCollapsible }) {
   const [show, setShow] = useState(true)
   const t = useFormatMessage()
 
@@ -35,11 +35,17 @@ function Collapse({ menu }) {
         className='mt-4 py-2 pl-5 pr-3 text-sm font-medium
             flex justify-between items-center cursor-pointer
             hover:bg-slate-100'
-        onClick={() => setShow(!show)}
+        onClick={() => {
+          if (isCollapsible) setShow(!show)
+        }}
         aria-hidden='true'
       >
         <div>{upperCase(t(...menu.label))}</div>
-        <BiChevronDown className='w-5 h-5  transition-all collapsed:rotate-180' />
+        <div>
+          {isCollapsible && (
+            <BiChevronDown className='w-5 h-5  transition-all collapsed:rotate-180' />
+          )}
+        </div>
       </div>
       <div
         className={twMerge('h-auto transition-all origin-top collapsed:scale-y-0 collapsed:h-0')}

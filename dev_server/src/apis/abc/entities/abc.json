@@ -1,0 +1,14 @@
+{
+  "type": "collection",
+  "tableName": "abcs",
+  "singularName": "abc",
+  "pluralName": "abcs",
+  "displayName": "abc",
+  "attributes": [
+    {
+      "type": "string",
+      "columnName": "name",
+      "displayName": "name"
+    }
+  ]
+}

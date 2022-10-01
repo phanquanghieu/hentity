@@ -1,7 +1,7 @@
 const adminStrategy = {
   authenticationCheck(req) {
     try {
-      const token = hentity.services.admin.core.jwt.getToken(req)
+      const token = h.services.admin.core.jwt.getToken(req)
       if (token) {
       }
       return {

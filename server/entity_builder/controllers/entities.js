@@ -1,6 +1,6 @@
 module.exports = {
   async find(req, res) {
-    res.ok(Object.values(hentity.entities).filter((entity) => !entity.hidden))
+    res.ok(Object.values(h.entities).filter((entity) => !entity.hidden))
   },
 
   async upsert(req, res) {
@@ -16,4 +16,4 @@ module.exports = {
   },
 }
 
-const getService = () => hentity.services.admin.entity_builder
+const getService = () => h.services.admin.entity_builder
