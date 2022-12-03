@@ -53,7 +53,7 @@ function Table({ columns, data, count, onClickEdit, onClickDelete }) {
                 {columns.map((column) => (
                   <td className='px-3' key={column.key}>
                     <div className='max-w-[10rem] whitespace-nowrap overflow-hidden text-ellipsis'>
-                      {d[column.key]}
+                      {d[column.key]?.toString?.()}
                     </div>
                   </td>
                 ))}

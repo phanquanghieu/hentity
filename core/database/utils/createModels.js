@@ -21,7 +21,7 @@ module.exports = async (connection, models, modelColumnCreator) => {
 
     Object.values(models).forEach((model) => {
       model.attributes.forEach((attribute) => {
-        if (attribute.type === 'relation') {
+        if (['relation', 'file'].includes(attribute.type)) {
           const options = calcAssociationOptions(model, attribute)
           dbModels[model.singularName][attribute.association](
             dbModels[attribute.reference],
@@ -42,7 +42,7 @@ module.exports = async (connection, models, modelColumnCreator) => {
 
     await connection.sync({ alter: true })
     // await connection.sync({ force: true })
-    
+
     // const book1 = await connection.models.book.create({ name: 'book 1', price: 1000 })
     // await connection.models.book.create({ name: 'book 2', price: 2000 })
     // await connection.models.book.create({ name: 'book 3', price: 3000 })

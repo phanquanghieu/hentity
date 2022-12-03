@@ -4,14 +4,13 @@ import { useSelector } from 'react-redux'
 import { getEntityBySingularName } from 'redux/slices/entityManagerSlice'
 import { Select } from 'ui'
 import { axios } from 'utils'
-import { cloneDeep, isArray, isNull, isObject } from 'lodash'
+import { isArray, isObject } from 'lodash'
 import { BiX } from 'react-icons/bi'
 
 function Relation(p, ref) {
   const entityTarget = useSelector(getEntityBySingularName(p.reference))
   const [searchValue, setSearchValue] = useState('')
   const [value, setValue] = useState(null)
-
   const labelColumn = entityTarget.attributes[0].columnName
   const isSingleAssociation = ['hasOne', 'belongsTo'].includes(p.association)
 
@@ -29,7 +28,6 @@ function Relation(p, ref) {
     return data.map((d) => ({ label: d[labelColumn], value: d.id }))
   })
 
-  // useEffect(() => {}, [value])
   useEffect(() => {
     let _value
     if (isSingleAssociation) {
@@ -42,7 +40,6 @@ function Relation(p, ref) {
   }, [])
 
   const handleChangeValue = (_value) => {
-    console.log(_value)
     if (isSingleAssociation) {
       p.onChange(calcValue(_value))
       setValue(_value)

@@ -1,11 +1,27 @@
 const { Op } = require('sequelize')
+const bcrypt = require('bcrypt')
+const saltRounds = 5
 
 module.exports = async (h, { models: dbModels }, models) => {
-  // dbModel
+  await initAdmin(dbModels.admin)
   await initRole(dbModels.role)
   await initPermission(dbModels.permission, h)
-  // console.log(h.routesContainer.getRoutesMap())
-  // console.log(h.entities)
+}
+
+const initAdmin = async (adminModel) => {
+  const ADMINS = [
+    {
+      username: 'admin',
+      password: 'admin',
+    },
+  ]
+  for (const ADMIN of ADMINS) {
+    let admin = await adminModel.findOne({ where: { username: ADMIN.username } })
+    if (admin) continue
+
+    const hash = bcrypt.hashSync(ADMIN.password, saltRounds)
+    await adminModel.create({ username: ADMIN.username, password: hash })
+  }
 }
 
 const initRole = async (roleModel) => {

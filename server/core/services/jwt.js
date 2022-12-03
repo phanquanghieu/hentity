@@ -12,12 +12,12 @@ module.exports = {
       return null
     }
   },
-  getTokenPayload(req) {
+  getToken(req) {
     const authorization = req.get('authorization')
     if (!authorization) return null
     const parts = authorization.split(/\s+/)
-    if (parts.length !== 2 && toLower(parts[0]) === 'bearer') return null
+    if (parts.length === 2 && toLower(parts[0]) === 'bearer') return parts[1]
 
-    return this.verify(parts[1])
+    return null
   },
 }

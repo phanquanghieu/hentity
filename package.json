@@ -12,8 +12,7 @@
   "scripts": {
     "hdev": "npm-run-all --parallel hdev_be hdev_fe",
     "hdev_fe": "cd admin && npm run hdev",
-    "hdev_be": "cd dev_server && npm run hdev",
-    "hdev_db": "nodemon dev_database.js"
+    "hdev_be": "cd dev_server && npm run hdev"
   },
   "repository": {
     "type": "git",
@@ -29,6 +28,8 @@
   },
   "homepage": "https://github.com/phanquanghieu/hentity#readme",
   "dependencies": {
+    "aws-sdk": "^2.1266.0",
+    "bcrypt": "^5.1.0",
     "chokidar": "^3.5.3",
     "commander": "^9.4.0",
     "cors": "^2.8.5",
@@ -36,6 +37,7 @@
     "dotenv": "^16.0.1",
     "execa": "5.1.1",
     "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
     "fs-extra": "^10.1.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
@@ -43,7 +45,8 @@
     "path": "^0.12.7",
     "resolve-cwd": "^3.0.0",
     "sequelize": "^6.21.3",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0 || ^8.2.0",

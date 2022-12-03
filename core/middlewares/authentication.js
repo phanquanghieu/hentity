@@ -1,14 +1,14 @@
 const { get, set } = require('lodash')
 
-module.exports = (req, res, next) => {
-  const route = get(req, 'state.route')
+module.exports = async (req, res, next) => {
+  const strategy = get(req, 'state.route.authStrategy')
+  if (!strategy) return next()
 
-  if (!route.auth) return next()
+  const { isInvalidToken, user } = await hentity.services.admin.core.auth[
+    strategy
+  ].authenticationCheck(req)
+  if (isInvalidToken) return res.unauthorized('Unauthorized')
 
-  const strategy = get(route, 'auth.strategy')
-  // const { isAuthenticated } = hentity.services.admin.core.auth[strategy].authenticationCheck(req)
-  // if (!isAuthenticated) return res.unauthorized('Missing or invalid credentials')
-
-  set(req, 'state.isAuthenticated', true)
+  set(req, 'state.user', user)
   next()
 }

@@ -12,6 +12,8 @@ module.exports = {
   },
 
   async delete(id) {
-    return await hentity.entityQuery('role').delete(id)
+    let role = await await hentity.entityQuery('role').findOne(id)
+    if (!['public', 'authenticated'].includes(role.type))
+      return await hentity.entityQuery('role').delete(id)
   },
 }

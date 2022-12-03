@@ -1,0 +1,28 @@
+{
+  "type": "collection",
+  "tableName": "files",
+  "singularName": "file",
+  "pluralName": "files",
+  "displayName": "File",
+  "isAdminEntity": true,
+  "hidden": true,
+  "attributes": [
+    {
+      "type": "uuid",
+      "columnName": "id",
+      "displayName": "Id"
+    },
+    {
+      "type": "string",
+      "columnName": "name",
+      "displayName": "Name",
+      "required": true
+    },
+    {
+      "type": "string",
+      "columnName": "url",
+      "displayName": "Url",
+      "required": true
+    }
+  ]
+}

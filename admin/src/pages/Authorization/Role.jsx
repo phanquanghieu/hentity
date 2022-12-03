@@ -1,33 +1,41 @@
-import React, { useEffect, useMemo } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getPermissions, getRoleEdit, setRoleEditById } from 'redux/slices/authorizationSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useFormatMessage } from 'hooks'
 import { BiCheck, BiPlus, BiTrashAlt } from 'react-icons/bi'
-import { twMerge } from 'tailwind-merge'
-import classNames from 'classnames'
 import { Button, Checkbox, Input, Textarea } from 'ui'
-import { errorTransIds, yup } from 'utils'
+import { axios, errorTransIds, yup } from 'utils'
+import { toast } from 'react-toastify'
+import { isArray } from 'lodash'
 
 function Role() {
+  const [selectedPermissions, setSelectedPermissions] = useState([])
   const roleEdit = useSelector(getRoleEdit)
   const permissions = useSelector(getPermissions)
-
   const {
     control,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({ resolver: yupResolver(roleSchema), mode: 'onChange' })
 
   const { roleId } = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const t = useFormatMessage()
 
   useEffect(() => {
     dispatch(setRoleEditById(roleId))
   }, [roleId])
+
+  useEffect(() => {
+    setValue('name', roleEdit.name)
+    setValue('description', roleEdit.description)
+    setSelectedPermissions([...roleEdit.permissions.map((permission) => permission.id)])
+  }, [roleEdit])
 
   const groupPermissions = useMemo(() => {
     let _groupPermissions = {}
@@ -38,12 +46,40 @@ function Role() {
     })
     return _groupPermissions
   }, [permissions])
-  console.log(roleId,roleEdit)
-  const handleCreateRole = async () => {}
-  const handleUpdateRole = async (data) => {
-    console.log(data)
+
+  const handleCreateRole = async (data) => {
+    let _role = { ...data, permissions: selectedPermissions }
+    let res = await axios.post(`/auth/roles`, _role)
+    if (res.error) return toast.error('Create error!')
+    toast.success('Create success!')
+    navigate(`/authorization`)
+    window.location.reload()
   }
-  const handleDeleteRole = async () => {}
+  const handleUpdateRole = async (data) => {
+    let _role = { ...data, permissions: selectedPermissions }
+    let res = await axios.put(`/auth/roles/${roleEdit.id}`, _role)
+    if (res.error) return toast.error('Update error!')
+    toast.success('Update success!')
+  }
+  const handleDeleteRole = async (roleId) => {
+    let res = await axios.delete(`/auth/roles/${roleId}`)
+    if (res.error) return toast.error('Delete error!')
+    toast.success('Delete success!')
+    navigate(`/authorization`)
+    window.location.reload()
+  }
+
+  const handleSelectPermission = (permissionIds) => {
+    if (isArray(permissionIds)) {
+      if (permissionIds.every((permissionId) => selectedPermissions.includes(permissionId))) {
+        setSelectedPermissions(selectedPermissions.filter((item) => !permissionIds.includes(item)))
+      } else setSelectedPermissions([...selectedPermissions, ...permissionIds])
+    } else {
+      if (selectedPermissions.includes(permissionIds)) {
+        setSelectedPermissions(selectedPermissions.filter((item) => item !== permissionIds))
+      } else setSelectedPermissions([...selectedPermissions, permissionIds])
+    }
+  }
 
   return (
     <div className='relative h-screen overflow-scroll flex-1'>
@@ -52,7 +88,7 @@ function Role() {
         <div>
           {roleId ? (
             <>
-              <Button className='mr-6' onClick={handleDeleteRole}>
+              <Button className='mr-6' onClick={() => handleDeleteRole(roleId)}>
                 <div className='flex items-center'>
                   <BiTrashAlt className='w-5 h-5 -ml-1 mr-1' />
                   <div>{t('Delete')}</div>
@@ -66,7 +102,7 @@ function Role() {
               </Button>
             </>
           ) : (
-            <Button color='base' onClick={handleSubmit(handleUpdateRole)}>
+            <Button color='base' onClick={handleSubmit(handleCreateRole)}>
               <div className='flex items-center'>
                 <BiPlus className='w-5 h-5 -ml-1 mr-1' />
                 <div>{t('Create')}</div>
@@ -117,24 +153,47 @@ function Role() {
           <div className='px-3 py-2 font-medium text-lg'>{t('Permissions')}</div>
           {Object.keys(groupPermissions).map((groupPermissionKey) => (
             <div className='mx-3 mb-6 border border-base-500 rounded' key={groupPermissionKey}>
-              <div className='px-3 py-1 border-b border-base-500'>{groupPermissionKey}</div>
-              <div className='px-3 py-1 flex flex-wrap'>
+              <div className='px-3 py-0.5 w-full rounded-t border-b border-base-500 bg-base-50 flex justify-between items-center'>
+                <div className=' font-medium'>{groupPermissionKey}</div>
+                <div>
+                  <Checkbox
+                    label={'Select All'}
+                    value={groupPermissions[groupPermissionKey]
+                      .map((permission) => permission.id)
+                      .every((permissionId) => selectedPermissions.includes(permissionId))}
+                    onChange={() => {
+                      handleSelectPermission(
+                        groupPermissions[groupPermissionKey].map((permission) => permission.id)
+                      )
+                    }}
+                  />
+                </div>
+              </div>
+              <div className='px-1 py-1 flex flex-wrap'>
                 {groupPermissions[groupPermissionKey].map((permission) => (
-                  <div className='w-1/3' key={permission.action}>
-                    <Controller
-                      name='permission'
-                      control={control}
-                      render={({ field }) => (
-                        <Checkbox label={permission.name} {...field} />
-                        // <Input
-                        // type='text'
-                        // label={t('Name')}
-                        // error={t(null, errors.name?.message)}
-                        // required
-                        // {...field}
-                        ///>
-                      )}
-                    />
+                  <div
+                    className='w-full px-2 rounded flex hover:bg-base-100'
+                    key={permission.action}
+                  >
+                    <div className='w-1/3 cursor-pointer' key={permission.action}>
+                      <Checkbox
+                        label={permission.name}
+                        value={selectedPermissions.includes(permission.id)}
+                        onChange={() => {
+                          handleSelectPermission(permission.id)
+                        }}
+                      />
+                    </div>
+                    <div className='w-2/3 flex items-center'>
+                      <div
+                        className={`w-16 rounded text-white text-sm ${
+                          METHOD_COLOR[permission.method]
+                        } font-semibold flex justify-center`}
+                      >
+                        {permission.method}
+                      </div>
+                      <div className='w-3 ml-5'>{calcUrl(permission.path)}</div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -148,7 +207,16 @@ function Role() {
 
 export default Role
 
+const calcUrl = (path) => `${process.env.BACKEND_URL}/api${path}`
+
 const roleSchema = yup.object({
   name: yup.string().trim().required(errorTransIds.required),
   description: yup.string().trim().required(errorTransIds.required),
 })
+
+const METHOD_COLOR = {
+  GET: 'bg-emerald-500',
+  POST: 'bg-amber-500',
+  PUT: 'bg-blue-500',
+  DELETE: 'bg-red-500',
+}

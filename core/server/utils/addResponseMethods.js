@@ -7,6 +7,7 @@ const successMethods = [
 const errorMethods = [
   { status: 400, key: 'badRequest', name: 'Bad Request' },
   { status: 400, key: 'validationError', name: 'Validation Error' },
+  { status: 400, key: 'invalidParams', name: 'Invalid Params' },
   { status: 400, key: 'paginationError', name: 'Pagination Error' },
   { status: 401, key: 'unauthorized', name: 'Unauthorized' },
   { status: 403, key: 'forbidden', name: 'Forbidden' },

@@ -17,15 +17,16 @@ function EntityManagerLayout() {
   }, [])
 
   useEffect(() => {
-    if (isEmpty(entities)) return
+    const _entities = entities.filter((entity) => !entity.hidden)
+    if (isEmpty(_entities)) return
 
     let _menus = [...menus]
-    _menus[0].links = filter(entities, ['type', 'collection']).map((collection) => ({
+    _menus[0].links = filter(_entities, ['type', 'collection']).map((collection) => ({
       ...collection,
       label: collection.displayName,
       to: `collection/${collection.singularName}`,
     }))
-    _menus[1].links = filter(entities, ['type', 'single']).map((single) => ({
+    _menus[1].links = filter(_entities, ['type', 'single']).map((single) => ({
       ...single,
       label: single.displayName,
       to: `single/${single.singularName}`,

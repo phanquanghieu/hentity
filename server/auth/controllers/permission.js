@@ -1,4 +1,4 @@
-const { pick } = require('lodash')
+const { pick, get } = require('lodash')
 
 module.exports = {
   async find(req, res) {
@@ -7,6 +7,7 @@ module.exports = {
     permissions = permissions.map((permission) => ({
       ...permission.dataValues,
       ...pick(routesMap[permission.action], ['method', 'path', 'name']),
+      is_public: !Boolean(get(routesMap[permission.action], 'authStrategy')),
     }))
     res.ok(permissions)
   },
