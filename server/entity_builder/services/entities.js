@@ -18,7 +18,6 @@ module.exports = {
     process.send('prevent_restart')
 
     let _entities = removeOldRelation(singularName)
-    console.log(_entities, singularName)
     await Promise.all([upsertApiFile(_entities), deleteApiFile(singularName)])
 
     process.send('restart')
@@ -62,7 +61,7 @@ const removeOldRelation = (singularName) => {
   const oldEntities = Object.values(h.entities).filter(
     (e) => !e.isAdminEntity && e.type === 'collection'
   )
-  // console.log(oldEntities)
+
   let _entities = cloneDeep(
     oldEntities.filter((oldEntity) => oldEntity.singularName !== singularName)
   )
@@ -108,5 +107,14 @@ const addNewRelation = (_entities, entityEdit) => {
       })
   })
 
+  let entityEditFileAttributes = entityEdit.attributes.filter(
+    (attribute) => attribute.type === 'file'
+  )
+  entityEditFileAttributes.forEach((fileAttribute) => {
+    fileAttribute.relation = 'oneToMany'
+    fileAttribute.association = 'belongsTo'
+    fileAttribute.reference = 'file'
+  })
+  console.log([..._entities, entityEdit])
   return [..._entities, entityEdit]
 }

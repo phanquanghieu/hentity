@@ -1,7 +1,7 @@
 import React, { useId } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-function Checkbox({ label, value, onChange, className }, ref) {
+function Checkbox({ label, value, onChange, className, ...rest}, ref) {
   const id = useId()
   return (
     <div className={twMerge('relative w-full py-1.5 flex items-center', className)} ref={ref}>
@@ -13,6 +13,7 @@ function Checkbox({ label, value, onChange, className }, ref) {
         onChange={onChange}
         id={id}
         type='checkbox'
+        {...rest}
       />
       {label && (
         <label className='ml-2  text-slate-700' htmlFor={id}>

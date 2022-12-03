@@ -83,7 +83,7 @@ function ManagerCollection() {
   const columns = useMemo(
     () =>
       collectionEntity.attributes
-        ?.filter?.((attribute) => attribute.type !== 'relation')
+        ?.filter?.((attribute) => !['relation', 'file'].includes(attribute.type))
         ?.map?.((attribute) => ({
           name: attribute.displayName,
           key: attribute.columnName,

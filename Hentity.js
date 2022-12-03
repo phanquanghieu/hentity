@@ -93,8 +93,8 @@ class Hentity {
     return this.entitiesContainer.get(path)
   }
 
-  cErr(message) {
-    return { error: true, message }
+  cErr(message, error = true) {
+    return { error, message }
   }
 }
 

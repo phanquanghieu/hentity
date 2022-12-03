@@ -1,0 +1,43 @@
+{
+  "type": "collection",
+  "tableName": "products",
+  "singularName": "product",
+  "pluralName": "products",
+  "displayName": "product",
+  "attributes": [
+    {
+      "type": "string",
+      "columnName": "name",
+      "displayName": "name"
+    },
+    {
+      "type": "integer",
+      "columnName": "price",
+      "displayName": "price"
+    },
+    {
+      "type": "file",
+      "columnName": "file",
+      "displayName": "file",
+      "relation": "oneToMany",
+      "association": "belongsTo",
+      "reference": "file"
+    },
+    {
+      "type": "text",
+      "columnName": "eeee",
+      "displayName": "eeee"
+    },
+    {
+      "type": "password",
+      "columnName": "eeeeeee",
+      "displayName": "eeee",
+      "defaultValue": "admin"
+    },
+    {
+      "type": "time",
+      "columnName": "addad",
+      "displayName": "addad"
+    }
+  ]
+}

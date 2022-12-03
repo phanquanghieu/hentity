@@ -1,0 +1,22 @@
+{
+  "type": "collection",
+  "tableName": "admins",
+  "singularName": "admin",
+  "pluralName": "admins",
+  "displayName": "Admin",
+  "isAdminEntity": true,
+  "hidden": true,
+  "attributes": [
+    {
+      "type": "string",
+      "columnName": "username",
+      "displayName": "Username"
+    },
+    {
+      "type": "password",
+      "columnName": "password",
+      "displayName": "Password",
+      "private": true
+    }
+  ]
+}

@@ -9,7 +9,6 @@ module.exports = (dbModels, models) => (modelName) => {
   return {
     async find(params = {}) {
       let results = await dbModel.findAll(params)
-      console.log(results)
       return results
     },
 
@@ -53,7 +52,9 @@ module.exports = (dbModels, models) => (modelName) => {
 }
 
 const setRelation = async (model, instance, data) => {
-  const attributesRelation = model.attributes.filter((attribute) => attribute.type === 'relation')
+  const attributesRelation = model.attributes.filter((attribute) =>
+    ['relation', 'file'].includes(attribute.type)
+  )
   for (let attributeRelation of attributesRelation) {
     if (has(data, attributeRelation.columnName)) {
       await instance[calcMethodName('set', attributeRelation.columnName)](

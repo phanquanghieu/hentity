@@ -2,9 +2,10 @@ import React from 'react'
 import { twMerge } from 'tailwind-merge'
 import colors from './utils/colors'
 
-function Button({ children, className, color, onClick, ...rest }, ref) {
+function Button({ children, className, color, onClick, htmlTag, ...rest }, ref) {
+  const Tag = htmlTag ?? 'button'
   return (
-    <button
+    <Tag
       className={twMerge(
         `px-3 py-1
         rounded-md shadow-sm border 
@@ -21,7 +22,7 @@ function Button({ children, className, color, onClick, ...rest }, ref) {
       {...rest}
     >
       {children}
-    </button>
+    </Tag>
   )
 }
 

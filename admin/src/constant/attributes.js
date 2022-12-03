@@ -42,26 +42,6 @@ const ATTRIBUTES = {
       private: false,
     },
   },
-  // richtext: {
-  //   info: {
-  //     icon: AttributeIcons.IconText,
-  //     label: 'Richtext',
-  //     valueType: 'text',
-  //     description: 'richtext',
-  //     inputWidget: '',
-  //     inputWidgetType: '',
-  //   },
-  //   model: {
-  //     type: 'richtext',
-  //     columnName: '',
-  //     displayName: '',
-  //     defaultValue: null,
-  //     required: false,
-  //     unique: false,
-  //     private: false,
-  //     configurable: true,
-  //   },
-  // },
   password: {
     info: {
       icon: AttributeIcons.IconPassword,
@@ -295,6 +275,24 @@ const ATTRIBUTES = {
       columnName: '',
       displayName: '',
       defaultValue: null,
+      required: false,
+      private: false,
+    },
+  },
+  file: {
+    info: {
+      icon: AttributeIcons.IconFile,
+      label: 'File',
+      valueType: 'string',
+      description: 'file',
+      inputWidget: 'File',
+      inputWidgetType: null,
+      layout: { width: 'w-1/2' },
+    },
+    model: {
+      type: 'file',
+      columnName: '',
+      displayName: '',
       required: false,
       private: false,
     },

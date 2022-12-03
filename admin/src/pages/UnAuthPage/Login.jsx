@@ -6,7 +6,7 @@ import { useFormatMessage } from 'hooks'
 import { toast } from 'react-toastify'
 import * as yup from 'yup'
 import { Button, Input } from 'ui'
-import { errorTransIds, local } from 'utils'
+import { axios, errorTransIds, local } from 'utils'
 
 function Login() {
   const {
@@ -18,9 +18,10 @@ function Login() {
   const navigate = useNavigate()
   const t = useFormatMessage()
 
-  const onSubmit = (data) => {
-    local.setUser({ id: 2, name: 'admin' })
-    local.setJwtToken('ddddd')
+  const onSubmit = async (data) => {
+    let res = await axios.post(`/login`, data)
+    if (res?.data?.error) return toast.error(res.data.message)
+    local.setJwtToken(res.data.token)
     toast.success('Login success!')
     navigate('/')
   }
@@ -35,15 +36,15 @@ function Login() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='pb-8'>
           <Controller
-            name='email'
+            name='username'
             control={control}
             render={({ field }) => (
               <Input
                 type='text'
-                label={t('Email', 'Email')}
-                error={t(null, errors.email?.message)}
+                label={t('Username', 'Username')}
+                error={t(null, errors.username?.message)}
                 required
-                placeholder={'Enter any email'}
+                placeholder={'admin'}
                 {...field}
               />
             )}
@@ -59,7 +60,7 @@ function Login() {
                 label={t('Password', 'Password')}
                 error={t(null, errors.password?.message)}
                 required
-                placeholder={'Enter any password'}
+                placeholder={'admin'}
                 {...field}
               />
             )}
@@ -69,15 +70,12 @@ function Login() {
           Login
         </Button>
       </form>
-      <div className='mt-6 flex justify-center items-center text-base-500'>
-        <Link to='/register'>Register</Link>
-      </div>
     </div>
   )
 }
 
 const loginSchema = yup.object({
-  email: yup.string().email(errorTransIds.email).required(errorTransIds.required),
+  username: yup.string().required(errorTransIds.required),
   password: yup.string().required(errorTransIds.required),
 })
 

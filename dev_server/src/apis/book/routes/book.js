@@ -1,36 +1,36 @@
 module.exports = {
   find: {
     method: 'GET',
-    path: '/abcs',
-    handler: 'api.abc.abc.find',
+    path: '/books',
+    handler: 'api.book.book.find',
     middlewares: [],
   },
 
   findOne: {
     method: 'GET',
-    path: '/abcs/:id',
-    handler: 'api.abc.abc.findOne',
+    path: '/books/:id',
+    handler: 'api.book.book.findOne',
     middlewares: [],
   },
 
   create: {
     method: 'POST',
-    path: '/abcs',
-    handler: 'api.abc.abc.create',
+    path: '/books',
+    handler: 'api.book.book.create',
     middlewares: [],
   },
 
   update: {
     method: 'PUT',
-    path: '/abcs/:id',
-    handler: 'api.abc.abc.update',
+    path: '/books/:id',
+    handler: 'api.book.book.update',
     middlewares: [],
   },
 
   delete: {
     method: 'DELETE',
-    path: '/abcs/:id',
-    handler: 'api.abc.abc.delete',
+    path: '/books/:id',
+    handler: 'api.book.book.delete',
     middlewares: [],
   },
 }

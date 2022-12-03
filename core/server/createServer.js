@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const fileUpload = require('express-fileupload')
 const mountRoutes = require('./mountRoutes')
 const coreMiddlewares = require('../middlewares')
 const addResponseMethods = require('./utils/addResponseMethods')
@@ -21,6 +22,7 @@ module.exports = (h) => {
       app.use(coreMiddlewares.cors())
       app.use(express.json())
       app.use(express.urlencoded({ extended: true }))
+      app.use(fileUpload())
 
       const adminPath = h.configs.admin.adminPath
       const buildPath = path.resolve(h.dirs.cwd, 'build')
