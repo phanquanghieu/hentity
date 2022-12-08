@@ -19,6 +19,14 @@
       "reference": "book",
       "referenceColumnName": "author",
       "referenceDisplayName": "author"
+    },
+    {
+      "type": "file",
+      "columnName": "image",
+      "displayName": "image",
+      "relation": "oneToMany",
+      "association": "belongsTo",
+      "reference": "file"
     }
   ]
 }

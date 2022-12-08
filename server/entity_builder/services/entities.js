@@ -76,45 +76,49 @@ const removeOldRelation = (singularName) => {
 }
 
 const addNewRelation = (_entities, entityEdit) => {
-  const calcAssociation = (relation, association) => {
-    if (relation === 'oneToOne') {
-      if (association === 'hasOne') return 'belongsTo'
-      if (association === 'belongsTo') return 'hasOne'
+  try {
+    const calcAssociation = (relation, association) => {
+      if (relation === 'oneToOne') {
+        if (association === 'hasOne') return 'belongsTo'
+        if (association === 'belongsTo') return 'hasOne'
+      }
+      if (relation === 'oneToMany') {
+        if (association === 'hasMany') return 'belongsTo'
+        if (association === 'belongsTo') return 'hasMany'
+      }
+      if (relation === 'manyToMany') return 'belongsToMany'
     }
-    if (relation === 'oneToMany') {
-      if (association === 'hasMany') return 'belongsTo'
-      if (association === 'belongsTo') return 'hasMany'
-    }
-    if (relation === 'manyToMany') return 'belongsToMany'
+
+    let entityEditRelationAttributes = entityEdit.attributes.filter(
+      (attribute) => attribute.type === 'relation'
+    )
+    console.log(entityEditRelationAttributes, _entities)
+    entityEditRelationAttributes.forEach((relationAttribute) => {
+      _entities
+        .find((_entity) => _entity.singularName === relationAttribute.reference)
+        ?.attributes?.push?.({
+          type: 'relation',
+          columnName: relationAttribute.referenceColumnName,
+          displayName: relationAttribute.referenceDisplayName,
+          relation: relationAttribute.relation,
+          association: calcAssociation(relationAttribute.relation, relationAttribute.association),
+          reference: entityEdit.singularName,
+          referenceColumnName: relationAttribute.columnName,
+          referenceDisplayName: relationAttribute.displayName,
+        })
+    })
+
+    let entityEditFileAttributes = entityEdit.attributes.filter(
+      (attribute) => attribute.type === 'file'
+    )
+    entityEditFileAttributes.forEach((fileAttribute) => {
+      fileAttribute.relation = 'oneToMany'
+      fileAttribute.association = 'belongsTo'
+      fileAttribute.reference = 'file'
+    })
+
+    return [..._entities, entityEdit]
+  } catch (error) {
+    console.log(error)
   }
-
-  let entityEditRelationAttributes = entityEdit.attributes.filter(
-    (attribute) => attribute.type === 'relation'
-  )
-
-  entityEditRelationAttributes.forEach((relationAttribute) => {
-    _entities
-      .find((_entity) => _entity.singularName === relationAttribute.reference)
-      .attributes.push({
-        type: 'relation',
-        columnName: relationAttribute.referenceColumnName,
-        displayName: relationAttribute.referenceDisplayName,
-        relation: relationAttribute.relation,
-        association: calcAssociation(relationAttribute.relation, relationAttribute.association),
-        reference: entityEdit.singularName,
-        referenceColumnName: relationAttribute.columnName,
-        referenceDisplayName: relationAttribute.displayName,
-      })
-  })
-
-  let entityEditFileAttributes = entityEdit.attributes.filter(
-    (attribute) => attribute.type === 'file'
-  )
-  entityEditFileAttributes.forEach((fileAttribute) => {
-    fileAttribute.relation = 'oneToMany'
-    fileAttribute.association = 'belongsTo'
-    fileAttribute.reference = 'file'
-  })
-  console.log([..._entities, entityEdit])
-  return [..._entities, entityEdit]
 }

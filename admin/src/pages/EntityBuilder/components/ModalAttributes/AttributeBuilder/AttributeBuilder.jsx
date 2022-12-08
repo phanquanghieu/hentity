@@ -70,7 +70,7 @@ function AttributeBuilder() {
         )}
         <BSettings control={control} />
       </div>
-      {isDevelopment() && (
+      {isDevelopment() && (attributeEdit.isEditable ?? true) && (
         <div className='px-5 py-4 border-t flex justify-between'>
           <Button onClick={() => dispatch(setShowModalAttribute(false))}>{t('Cancel')}</Button>
           <div>

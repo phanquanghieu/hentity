@@ -1,4 +1,4 @@
-const { min, has, get, set } = require('lodash')
+const { min, has, get, set, isNil } = require('lodash')
 
 module.exports = (req, res, next) => {
   const { defaultLimit, maxLimit } = h.configs.api
@@ -10,7 +10,12 @@ module.exports = (req, res, next) => {
   req.query.offset = page && page > 0 ? (page - 1) * limit : parseInt(req.query.offset || 0)
 
   if (!has(req.query, 'include')) set(req.query, 'include.all', true)
-  if (get(req.query, 'include.all') === 'false') set(req.query, 'include.all', false)
-  
+
+  const includeAll = get(req.query, 'include.all')
+  if (!isNil(includeAll)) set(req.query, 'include.all', Boolean(includeAll))
+
+  const includeNested = get(req.query, 'include.nested')
+  if (!isNil(includeNested)) set(req.query, 'include.nested', Boolean(includeNested))
+
   next()
 }

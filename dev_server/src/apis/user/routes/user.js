@@ -2,35 +2,35 @@ module.exports = {
   find: {
     method: 'GET',
     path: '/users',
-    handler: 'admin.auth.user.find',
+    handler: 'api.user.user.find',
     middlewares: [],
   },
 
   findOne: {
     method: 'GET',
     path: '/users/:id',
-    handler: 'admin.auth.user.findOne',
+    handler: 'api.user.user.findOne',
     middlewares: [],
   },
 
   create: {
     method: 'POST',
     path: '/users',
-    handler: 'admin.auth.user.create',
+    handler: 'api.user.user.create',
     middlewares: [],
   },
 
   update: {
     method: 'PUT',
     path: '/users/:id',
-    handler: 'admin.auth.user.update',
+    handler: 'api.user.user.update',
     middlewares: [],
   },
 
   delete: {
     method: 'DELETE',
     path: '/users/:id',
-    handler: 'admin.auth.user.delete',
+    handler: 'api.user.user.delete',
     middlewares: [],
   },
 }

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useFormatMessage } from 'hooks'
-import { BiCheck, BiPlus, BiTrashAlt } from 'react-icons/bi'
+import { BiCheck, BiCopy, BiPlus, BiTrashAlt } from 'react-icons/bi'
 import { Button, Checkbox, Input, Textarea } from 'ui'
 import { axios, errorTransIds, yup } from 'utils'
 import { toast } from 'react-toastify'
@@ -79,6 +79,11 @@ function Role() {
         setSelectedPermissions(selectedPermissions.filter((item) => item !== permissionIds))
       } else setSelectedPermissions([...selectedPermissions, permissionIds])
     }
+  }
+
+  const handleCopyUrl = (url) => {
+    navigator.clipboard.writeText(url)
+    toast.info('Copied to clipboard!')
   }
 
   return (
@@ -193,6 +198,14 @@ function Role() {
                         {permission.method}
                       </div>
                       <div className='w-3 ml-5'>{calcUrl(permission.path)}</div>
+                    </div>
+                    <div className='flex justify-center items-center'>
+                      <Button
+                        className='p-1'
+                        onClick={() => handleCopyUrl(calcUrl(permission.path))}
+                      >
+                        <BiCopy />
+                      </Button>
                     </div>
                   </div>
                 ))}
