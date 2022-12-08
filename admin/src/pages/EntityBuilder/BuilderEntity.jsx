@@ -97,16 +97,15 @@ function BuilderEntity() {
               <tbody>
                 {entityEdit?.attributes?.map?.((attribute) => {
                   const ATTRIBUTE = ATTRIBUTES[attribute.type]
-                  const IconEdit = isDevelopment() ? BiPencil : BiBookAlt
+                  const isEditable = attribute.isEditable ?? true
+                  const IconEdit = isDevelopment() && isEditable ? BiPencil : BiBookAlt
                   if (!ATTRIBUTE) return
                   return (
                     <tr className='border-b border-slate-200' key={attribute.columnName}>
                       <td className='px-4'>
                         <div className='h-12 flex items-center font-bold'>
                           <ATTRIBUTE.info.icon />
-                          <div className='ml-4 whitespace-nowrap'>
-                            {attribute.displayName || 'sss'}
-                          </div>
+                          <div className='ml-4 whitespace-nowrap'>{attribute.displayName}</div>
                         </div>
                       </td>
                       <td className='px-4'>
@@ -125,7 +124,7 @@ function BuilderEntity() {
                               dispatch(setShowModalAttribute(true))
                             }}
                           />
-                          {isDevelopment() && (
+                          {isDevelopment() && isEditable && (
                             <BiTrashAlt
                               className='w-8 h-8 ml-2 p-1 rounded-full text-red-500
                               hover:shadow hover:bg-red-500 hover:text-white cursor-pointer'

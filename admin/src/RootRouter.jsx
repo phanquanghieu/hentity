@@ -23,7 +23,6 @@ const CreateComponent = React.lazy(() => import('pages/EntityBuilder/CreateCompo
 
 const Upload = React.lazy(() => import('pages/Upload'))
 
-const Authorization = React.lazy(() => import('pages/Authorization'))
 const Role = React.lazy(() => import('pages/Authorization/Role'))
 
 const Settings = React.lazy(() => import('pages/Settings'))

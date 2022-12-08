@@ -8,28 +8,34 @@
     {
       "type": "string",
       "columnName": "username",
-      "displayName": "Username"
+      "displayName": "Username",
+      "isEditable": false
     },
     {
       "type": "email",
       "columnName": "email",
-      "displayName": "Email"
+      "displayName": "Email",
+      "isEditable": false
     },
     {
       "type": "password",
       "columnName": "password",
       "displayName": "Password",
-      "private": true
+      "private": true,
+      "isEditable": false
     },
     {
       "type": "string",
       "columnName": "reset_password_token",
-      "displayName": "Reset Password Token"
+      "displayName": "Reset Password Token",
+      "private": true,
+      "isEditable": false
     },
     {
       "type": "boolean",
       "columnName": "is_blocked",
-      "displayName": "Is Blocked"
+      "displayName": "Is Blocked",
+      "isEditable": false
     },
     {
       "type": "relation",
@@ -39,8 +45,8 @@
       "association": "belongsTo",
       "reference": "role",
       "referenceColumnName": "users",
-      "referenceDisplayName": "Users"
+      "referenceDisplayName": "Users",
+      "isEditable": false
     }
-  ],
-  "isAdminEntity": true
+  ]
 }

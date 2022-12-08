@@ -22,7 +22,9 @@ function EntityEditor({ mode, attributesModel, dataEdit, onSaveData, onDeleteDat
     const attributes = calcAttributes(attributesModel)
     return [
       attributes,
-      Object.values(attributes).filter((attribute) => attribute.model.type !== 'relation'),
+      Object.values(attributes).filter(
+        (attribute) => attribute.model.type !== 'relation' && attribute.model.private !== true
+      ),
       Object.values(attributes).filter((attribute) => attribute.model.type === 'relation'),
     ]
   }, [attributesModel])
