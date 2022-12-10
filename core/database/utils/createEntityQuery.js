@@ -27,7 +27,7 @@ module.exports = (dbModels, models) => (modelName) => {
 
       await setRelation(model, instance, data)
 
-      return true
+      return instance
     },
 
     async update(id, data) {
@@ -38,7 +38,7 @@ module.exports = (dbModels, models) => (modelName) => {
 
       await setRelation(model, instance, data)
 
-      return true
+      return instance
     },
 
     async upsert(data) {
