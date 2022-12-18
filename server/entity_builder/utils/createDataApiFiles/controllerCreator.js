@@ -5,6 +5,12 @@ const collectionType = ({ singularName }) => `module.exports = {
     res.ok(result)
   },
 
+  async count(req, res) {
+    const { query } = req
+    const result = await hentity.services.api.${singularName}.${singularName}.count(query)
+    res.ok(result)
+  },
+
   async findOne(req, res) {
     const { id } = req.params
     const { query } = req

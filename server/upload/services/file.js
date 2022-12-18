@@ -32,8 +32,8 @@ module.exports = {
         })
         .promise()
 
-      await this.create({ name: file.name, url: `/${url}` })
-      return { url: `/${url}` }
+      let fileCreated = await this.create({ name: file.name, url: `/${url}` })
+      return fileCreated
     } catch (error) {
       console.log(error)
     }
