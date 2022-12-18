@@ -6,6 +6,13 @@ const collectionType = ({ singularName, pluralName }) => `module.exports = {
     middlewares: [],
   },
 
+  count: {
+    method: 'GET',
+    path: '/${pluralName}/count',
+    handler: 'api.${singularName}.${singularName}.count',
+    middlewares: [],
+  },
+
   findOne: {
     method: 'GET',
     path: '/${pluralName}/:id',

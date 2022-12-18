@@ -32,8 +32,7 @@ const authorizationSlice = createSlice({
 })
 
 export const getRoles = (state) => state.authorization.roles
-export const getPermissions = (state) =>
-  state.authorization.permissions.filter((permission) => !permission.is_public)
+export const getPermissions = (state) => state.authorization.permissions
 export const getRoleEdit = (state) => state.authorization.roleEdit
 
 export const { setRoles, setPermissions, setRoleEditById } = authorizationSlice.actions

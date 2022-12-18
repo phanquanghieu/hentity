@@ -14,7 +14,8 @@ import { isArray } from 'lodash'
 function Role() {
   const [selectedPermissions, setSelectedPermissions] = useState([])
   const roleEdit = useSelector(getRoleEdit)
-  const permissions = useSelector(getPermissions)
+  const permissions = useSelector(getPermissions).filter((permission) => !permission.is_public)
+  const permissionPublics = useSelector(getPermissions).filter((permission) => permission.is_public)
   const {
     control,
     handleSubmit,
@@ -213,6 +214,35 @@ function Role() {
             </div>
           ))}
         </div>
+        <div className='p-3 pb-1 mt-6 bg-white shadow-md rounded-md'>
+          <div className='px-3 py-2 font-medium text-lg'>{t('Public API')}</div>
+          <div className='mx-3 mb-6 border border-base-500 rounded'>
+            <div className='px-1 py-1 flex flex-wrap'>
+              {permissionPublics.map((permission) => (
+                <div className='w-full px-2 rounded flex hover:bg-base-100' key={permission.action}>
+                  <div className='w-1/3 cursor-pointer' key={permission.action}>
+                    <Checkbox label={permission.name} value={true} readOnly />
+                  </div>
+                  <div className='w-2/3 flex items-center'>
+                    <div
+                      className={`w-16 rounded text-white text-sm ${
+                        METHOD_COLOR[permission.method]
+                      } font-semibold flex justify-center`}
+                    >
+                      {permission.method}
+                    </div>
+                    <div className='w-3 ml-5'>{calcUrl(permission.path)}</div>
+                  </div>
+                  <div className='flex justify-center items-center'>
+                    <Button className='p-1' onClick={() => handleCopyUrl(calcUrl(permission.path))}>
+                      <BiCopy />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -220,7 +250,7 @@ function Role() {
 
 export default Role
 
-const calcUrl = (path) => `${process.env.BACKEND_URL}/api${path}`
+const calcUrl = (path) => `/api${path}`
 
 const roleSchema = yup.object({
   name: yup.string().trim().required(errorTransIds.required),

@@ -11,7 +11,7 @@ module.exports = {
   },
 
   async upload(req, res) {
-    const file = req.files.file
+    const file = req.files?.file
     if (!file) return res.invalidParams("Missing 'file' file")
     const result = await h.services.admin.upload.file.upload(file)
     res.ok(result)
